@@ -9,6 +9,7 @@ import {
   Card,
   Subheading,
   TextInput,
+  HelperText
 } from 'react-native-paper';
 
 import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUtils';
@@ -21,6 +22,7 @@ const { width } = Dimensions.get('window');
 
 export default function RoomCreationScreen(props) {
   const [roomName, setRoomName] = useState('');
+  const [isTouched, setIsTouched] = React.useState(false);
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
   const {
@@ -50,10 +52,26 @@ export default function RoomCreationScreen(props) {
           label="Room name"
           onChangeText={(text) => setRoomName(text)}
           value={roomName}
+          error={isTouched && !roomName}
+          onBlur={() => {
+            setIsTouched(true);
+          }}
         />
+        <HelperText
+          type="error"
+          visible={isTouched && !roomName}
+        >
+          Room name is required
+        </HelperText>
         <Subheading>
         Questions
         </Subheading>
+        <HelperText
+          type="info"
+          visible={!getQuestionArray(questionObject).length}
+        >
+          At least one question has to be picked
+        </HelperText>
         <QuestionOptions
           onQuestionOptionPress={onQuestionOptionPress}
           questionObject={questionObject}
@@ -83,6 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   actions: {
+    position: 'absolute',
+    bottom: 0,
     width,
     alignItems: 'flex-end',
     justifyContent: 'center',

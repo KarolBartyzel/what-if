@@ -6,26 +6,32 @@ import {
   Text,
 } from 'react-native-paper';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { questionOptions } from './questionOptionsUtils';
 
 export default function QuestionOptions({
   onQuestionOptionPress,
   questionObject,
 }) {
-  return questionOptions.map((questionOption) => (
-    <Chip
-      key={questionOption}
-      onPress={onQuestionOptionPress(questionOption)}
-      mode="outlined"
-      selected={questionObject[questionOption]}
-      style={styles.chip}
-    >
-      <Text>
-        {questionOption}
-      </Text>
-    </Chip>
-  ));
+  return (
+    <View style={styles.questionOptions}>
+    {
+      questionOptions.map((questionOption) => (
+        <Chip
+          key={questionOption}
+          onPress={onQuestionOptionPress(questionOption)}
+          mode="outlined"
+          selected={questionObject[questionOption]}
+          style={styles.chip}
+        >
+          <Text>
+            {questionOption}
+          </Text>
+        </Chip>
+      ))
+    }
+    </View>
+  );
 }
 
 QuestionOptions.propTypes = {
@@ -40,4 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 4,
   },
+  questionOptions: {
+    flex: 1
+  }
 });

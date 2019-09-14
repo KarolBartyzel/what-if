@@ -17,7 +17,7 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 
 import QuestionOptions from './QuestionOptions';
 
-export default function RoomCreationScreen({ errorMessage, onCreateRoom }) {
+export default function RoomCreationScreen(props) {
   const [roomName, setRoomName] = useState('');
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
@@ -26,13 +26,12 @@ export default function RoomCreationScreen({ errorMessage, onCreateRoom }) {
     [questionOption]: !questionObject[questionOption],
   });
 
+  const onCreateRoom = (room) => {
+    props.setRoomUuid('lala');
+  };
+
   return (
     <View style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title
-          title={<Text>Room settings</Text>}
-        />
-        <Card.Content>
           <Subheading>
             General
           </Subheading>
@@ -48,14 +47,6 @@ export default function RoomCreationScreen({ errorMessage, onCreateRoom }) {
             onQuestionOptionPress={onQuestionOptionPress}
             questionObject={questionObject}
           />
-          {errorMessage
-            ? (
-              <Text>
-                {errorMessage}
-              </Text>
-            )
-            : null}
-        </Card.Content>
         <Card.Actions>
           <Button
             onPress={() => onCreateRoom({
@@ -68,22 +59,12 @@ export default function RoomCreationScreen({ errorMessage, onCreateRoom }) {
           </Button>
 
         </Card.Actions>
-      </Card>
     </View>
   );
 }
 
-RoomCreationScreen.propTypes = {
-  errorMessage: PropTypes.string,
-  onCreateRoom: PropTypes.func.isRequired,
-};
-RoomCreationScreen.defaultProps = {
-  errorMessage: null,
-};
-
-RoomCreationScreen.navigationOptions = {
-  title: 'Create room',
-};
+RoomCreationScreen.propTypes = {};
+RoomCreationScreen.defaultProps = {};
 
 const styles = StyleSheet.create({
   container: {

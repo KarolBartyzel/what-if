@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Card } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
@@ -18,15 +18,7 @@ export default function StartGameScreen(props) {
     setIsNewGame(true);
   }
 
-  ApiHelper.createRoom('XD', ['123'])
-    .then((id) => {
-      ApiHelper.joinRoom(id, '696969')
-        .then(({userId, room}) => {
-          console.log(userId)
-          room.on('users_update', (msg) => console.log('Got message', msg));
-        })
-        .catch(console.log)
-    });
+
 
   return (
     <View style={styles.startGameScreen}>
@@ -44,14 +36,14 @@ export default function StartGameScreen(props) {
 					Create New Room
         </Button>
       </View>
-      <View style={styles.tabContent}>
-        {isNewGame && (
-        <CreateNewGame navigate={props.navigation.navigate} />
-        )}
-        {!isNewGame && (
-        <JoinExistingGame navigate={props.navigation.navigate} />
-        )}
-      </View>
+      <Card style={styles.tabContent}>
+          {isNewGame && (
+            <CreateNewGame navigate={props.navigation.navigate} />
+          )}
+          {!isNewGame && (
+            <JoinExistingGame navigate={props.navigation.navigate} />
+          )}
+      </Card>
     </View>
   );
 }
@@ -65,13 +57,14 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   tabSwitch: {
     flexDirection: 'row',
+    marginTop: 50
   },
   tabContent: {
-    height: '50%',
     width: '100%',
+    alignItems: 'center',
+    flex: 1,
   },
 });

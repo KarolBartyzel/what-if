@@ -29,6 +29,7 @@ export default function ({ navigation }) {
   const [answer, setAnswer] = useState('');
   const {
     questionsPrefixes,
+    sendQuestionsAnswers,
   } = React.useContext(RoomContext);
 
   const currentQuestionPrefix = questionsPrefixes[currentQuestionPrefixIndex];
@@ -49,9 +50,6 @@ export default function ({ navigation }) {
 
   const submit = () => {
     if (question.length * answer.length === 0) return;
-    const {
-      sendQuestionsAnswers,
-    } = useContext(RoomContext);
     const userAnswers = ({
       ...userAnswers,
       [currentQuestionPrefix]: {

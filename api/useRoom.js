@@ -58,12 +58,12 @@ export default () => {
       .reduce(
         (accumulator, nextPrefix) => {
           const questionAnswer = {
-            prefix: nextPrefix,
+            question_prefix: nextPrefix,
             question: questionsAnswersByPrefix[nextPrefix].question,
             answer: questionsAnswersByPrefix[nextPrefix].answer,
           };
           accumulator.push(questionAnswer);
-          return questionAnswer;
+          return accumulator;
         },
         [],
       );

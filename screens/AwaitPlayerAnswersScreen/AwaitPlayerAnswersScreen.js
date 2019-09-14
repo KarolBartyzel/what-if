@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { View } from 'react-native';
@@ -7,7 +7,7 @@ import { ActivityIndicator, Text } from 'react-native-paper';
 
 import { RoomContext } from '../../api/RoomContext';
 
-export default function AwaitPlayerAnswersScreen({}) {
+export default function AwaitPlayerAnswersScreen({ navigation }) {
   const {
     answersObject,
   } = useContext(RoomContext);
@@ -24,19 +24,19 @@ export default function AwaitPlayerAnswersScreen({}) {
         animating
       />
     )
-      : (
-        <View>
-          <Text>
-            Awaiting users...
+    : (
+      <View>
+        <Text>
+          Awaiting users...
+        </Text>
+        {answersObject.answered_users.map((answeredUser) => (
+          <Text
+            key={answeredUser.user_id}
+          >
+            {answeredUser.name}
           </Text>
-          {answersObject.answered_users.map((answeredUser) => (
-            <Text
-              key={answeredUser.id}
-            >
-              {answeredUser.name}
-            </Text>
-          ))}
-        </View>
+        ))}
+      </View>
     );
 }
 

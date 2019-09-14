@@ -27,7 +27,7 @@ export default function JoinExistingGame(props) {
 
   function handleBarCodeScanned({ type, data: roomUuid }) {
     setIsScanned(true);
-    setRoomId('roomUuid')
+    setRoomId(roomUuid)
     props.navigate('QuestionsAndAnswers', { roomUuid });
   }
 

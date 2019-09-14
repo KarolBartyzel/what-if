@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
-  View,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -16,6 +16,8 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 import QuestionOptions from './QuestionOptions';
 import ApiHelper from '../../../api/ApiHelper';
 import { RoomContext } from '../../../api/RoomContext';
+
+const { width } = Dimensions.get('window');
 
 export default function RoomCreationScreen(props) {
   const [roomName, setRoomName] = useState('');
@@ -39,35 +41,38 @@ export default function RoomCreationScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Subheading>
-            General
-      </Subheading>
-      <TextInput
-        label="Room name"
-        onChangeText={(text) => setRoomName(text)}
-        value={roomName}
-      />
-      <Subheading>
-            Questions
-      </Subheading>
-      <QuestionOptions
-        onQuestionOptionPress={onQuestionOptionPress}
-        questionObject={questionObject}
-      />
-      <Card.Actions>
+    <>
+      <Card.Content style={styles.container}>
+        <Subheading>
+        General
+        </Subheading>
+        <TextInput
+          label="Room name"
+          onChangeText={(text) => setRoomName(text)}
+          value={roomName}
+        />
+        <Subheading>
+        Questions
+        </Subheading>
+        <QuestionOptions
+          onQuestionOptionPress={onQuestionOptionPress}
+          questionObject={questionObject}
+        />
+      </Card.Content>
+      <Card.Actions style={styles.actions}>
         <Button
           onPress={() => onCreateRoom({
             roomName,
             questions: getQuestionArray(questionObject),
           })}
           mode="contained"
+          style={styles.createGameButton}
+          contentStyle={styles.createGameButtonContent}
         >
-              Create
+          Create
         </Button>
-
       </Card.Actions>
-    </View>
+    </>
   );
 }
 
@@ -76,11 +81,18 @@ RoomCreationScreen.defaultProps = {};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    padding: 8,
-    width: '100%',
+    width,
+    flex: 1,
   },
-  card: {
-    width: '100%',
+  actions: {
+    width,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  createGameButton: {
+    width: 200,
+  },
+  createGameButtonContent: {
+    padding: 5,
   },
 });

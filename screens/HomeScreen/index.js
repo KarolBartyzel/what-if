@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
@@ -37,12 +37,12 @@ export default function StartGameScreen(props) {
         </Button>
       </View>
       <Card style={styles.tabContent}>
-          {isNewGame && (
-            <CreateNewGame navigate={props.navigation.navigate} />
-          )}
-          {!isNewGame && (
-            <JoinExistingGame navigate={props.navigation.navigate} />
-          )}
+        {isNewGame && (
+        <CreateNewGame navigate={props.navigation.navigate} />
+        )}
+        {!isNewGame && (
+        <JoinExistingGame navigate={props.navigation.navigate} />
+        )}
       </Card>
     </View>
   );
@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
   },
   tabSwitch: {
     flexDirection: 'row',
-    marginTop: 50
+    marginTop: 50,
   },
   tabContent: {
-    width: '100%',
+    width: Dimensions.get('window').width,
     alignItems: 'center',
     flex: 1,
   },

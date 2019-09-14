@@ -7,8 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "lint": "eslint api/** components/** constants/** navigation/** screens/**",
-    "lint:fix": "eslint api/** components/** constants/** navigation/** screens/** --fix"
+    "lint": "eslint api/** constants/** navigation/** screens/**",
+    "lint:fix": "eslint api/** constants/** navigation/** screens/** --fix"
   },
   "jest": {
     "preset": "jest-expo"

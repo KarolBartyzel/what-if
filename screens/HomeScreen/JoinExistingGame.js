@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Dimensions, StyleSheet, View, Image  } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -45,13 +45,13 @@ export default function JoinExistingGame(props) {
         style={[StyleSheet.absoluteFill, styles.joinExistingGame]}
       >
         <View style={styles.barCodeScannerContainer}>
-          <View style={styles.barCodeScannerOpacity}/>
+          <View style={styles.barCodeScannerOpacity} />
           <View style={styles.barCodeScannerNoOpacity} />
-          <View style={styles.barCodeScannerOpacity}/>
+          <View style={styles.barCodeScannerOpacity} />
         </View>
       </BarCodeScanner>
       )}
-      </View>
+    </View>
   );
 }
 
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'stretch',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   barCodeScannerOpacity: {
     backgroundColor: 'rgba(0, 0, 0, .6)',

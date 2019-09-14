@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
-import { RoomContext } from '../../api/RoomContext';
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
 import { RoomContext } from '../../api/RoomContext';

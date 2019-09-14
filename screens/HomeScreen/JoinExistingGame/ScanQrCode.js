@@ -8,7 +8,7 @@ import { RoomContext } from '../../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
-export default function JoinExistingGame(props) {
+export default function ScanQrCode(props) {
   const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
   const { setRoomId } = useContext(RoomContext);
 
@@ -49,10 +49,6 @@ export default function JoinExistingGame(props) {
     </View>
   );
 }
-
-JoinExistingGame.propTypes = {
-  navigate: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   joinExistingGame: {

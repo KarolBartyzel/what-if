@@ -32,8 +32,8 @@ export default function RoomCreationScreen(props) {
     [questionOption]: !questionObject[questionOption],
   });
 
-  const onCreateRoom = (room) => {
-    ApiHelper.createRoom('XD', ['What if', 'Why', 'How'])
+  const onCreateRoom = () => {
+    ApiHelper.createRoom(roomName, getQuestionArray(questionObject))
       .then((uuid) => {
         setRoomId(uuid);
         props.setRoomUuid(uuid);
@@ -61,13 +61,11 @@ export default function RoomCreationScreen(props) {
       </Card.Content>
       <Card.Actions style={styles.actions}>
         <Button
-          onPress={() => onCreateRoom({
-            roomName,
-            questions: getQuestionArray(questionObject),
-          })}
+          onPress={onCreateRoom}
           mode="contained"
           style={styles.createGameButton}
           contentStyle={styles.createGameButtonContent}
+          disabled={!roomName.length || !getQuestionArray(questionObject).length}
         >
           Create
         </Button>

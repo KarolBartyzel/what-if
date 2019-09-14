@@ -12,7 +12,7 @@ export default () => {
   const [room, changeRoom] = useState('');
   const [questionsPrefixes, setQuestionsPrefixes] = useState('');
   const [roomName, seRoomName] = useState('');
-  const [answersObject, setAnswersObject] = useState({ answeredUser: [], answers: null });
+  const [answersObject, setAnswersObject] = useState({ answered_users: [], answers: null });
 
 
   useEffect(() => {

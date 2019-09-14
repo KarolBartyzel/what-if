@@ -28,11 +28,11 @@ export default function ResultScreen({ onClose, results }) {
           <List.Section>
             {results.map((result) => (
               <Card
-                key={result.question}
+                key={`${result.question_prefix} ${result.question}`}
                 style={styles.questionCard}
               >
                 <Card.Title
-                  title={result.question}
+                  title={`${result.question_prefix} ${result.question}`}
                 />
                 <Card.Content>
                   <Text>
@@ -57,6 +57,7 @@ export default function ResultScreen({ onClose, results }) {
 ResultScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.shape({
+    question_prefix: PropTypes.string,
     question: PropTypes.string,
     answer: PropTypes.string,
   })).isRequired,

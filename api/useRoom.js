@@ -9,6 +9,8 @@ export default () => {
   const [error, setError] = useState({ error: '' });
   const [roomId, setRoomId] = useState('');
   const [gameStarted, changeGameStarted] = useState('');
+  const [room, changeRoom] = useState('');
+
 
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export default () => {
     const channel = socket.channel(`room:${roomId}`, { username: 'dupa' });
     channel.join()
       .receive('ok', ({ user_id }) => {
-        console.log('XDD')
+        changeRoom(channel)
         setUserId(user_id);
         setLoading(false);
       })
@@ -31,10 +33,13 @@ export default () => {
         setError({ error: reason });
       });
 
+    channel.on("game_started", () => changeGameStarted(true));
+
     return () => {
       channel.leave();
     };
   }, [roomId]);
+
 
   return [userId, loading, error, setRoomId, gameStarted];
 };

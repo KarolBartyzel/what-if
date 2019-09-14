@@ -4,10 +4,6 @@ const apiUrl = 'http://192.168.1.30:4000/api/rooms';
 export default {
 
   createRoom: (roomName, questions) => {
-    console.log("creating room...");
-
-    fetch('http://google.com').then((resp) => console.log(resp));
-
     data = {room_name: roomName, questions: questions}
 
     return fetch(apiUrl,

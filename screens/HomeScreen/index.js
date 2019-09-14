@@ -4,6 +4,7 @@ import { Button } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
+import ApiHelper from "../../api/ApiHelper";
 
 export default function StartGameScreen(props) {
   const [isNewGame, setIsNewGame] = React.useState(true);
@@ -16,6 +17,16 @@ export default function StartGameScreen(props) {
   function handleCreateNewGame() {
     setIsNewGame(true);
   }
+
+  ApiHelper.createRoom('XD', ['123'])
+    .then((id) => {
+      ApiHelper.joinRoom(id, '696969')
+        .then(({userId, room}) => {
+          console.log(userId)
+          room.on('users_update', (msg) => console.log('Got message', msg));
+        })
+        .catch(console.log)
+    });
 
   return (
     <View style={styles.startGameScreen}>

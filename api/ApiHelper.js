@@ -1,4 +1,4 @@
-const apiUrl = 'https://hidden-hollows-14760.herokuapp.com';
+const apiUrl = 'http://192.168.1.30:4000';
 
 export default {
 

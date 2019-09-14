@@ -17,7 +17,7 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 
 import QuestionOptions from './QuestionOptions';
 
-export default function RoomCreationScreen({ onCancel, onCreateRoom }) {
+export default function RoomCreationScreen({ onCreateRoom }) {
   const [roomName, setRoomName] = useState('');
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
@@ -28,7 +28,7 @@ export default function RoomCreationScreen({ onCancel, onCreateRoom }) {
 
   return (
     <View style={styles.container}>
-      <Card>
+      <Card style={styles.card}>
         <Card.Title
           title={<Text>Room settings</Text>}
         />
@@ -51,23 +51,13 @@ export default function RoomCreationScreen({ onCancel, onCreateRoom }) {
         </Card.Content>
         <Card.Actions>
           <Button
-            onPress={onCancel}
-            mode='outlined'
-          >
-            <Text>
-              Cancel
-            </Text>
-          </Button>
-          <Button
             onPress={() => onCreateRoom({
               roomName,
               questions: getQuestionArray(questionObject),
             })}
             mode='contained'
           >
-            <Text>
               Create
-            </Text>
           </Button>
 
         </Card.Actions>
@@ -77,7 +67,6 @@ export default function RoomCreationScreen({ onCancel, onCreateRoom }) {
 }
 
 RoomCreationScreen.propTypes = {
-  onCancel: PropTypes.func.isRequired,
   onCreateRoom: PropTypes.func.isRequired,
 };
 RoomCreationScreen.defaultProps = {};
@@ -88,8 +77,12 @@ RoomCreationScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
     backgroundColor: '#fff',
     padding: 8,
+    width: '100%'
   },
+  card: {
+    width: '100%'
+  }
 });

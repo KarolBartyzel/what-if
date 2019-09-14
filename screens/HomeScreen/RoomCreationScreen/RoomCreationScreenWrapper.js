@@ -2,13 +2,13 @@ import React from 'react';
 
 import RoomCreationScreen from './RoomCreationScreen';
 
-export default function RoomCreationScreenWrapper() {
-  const onCreateRoom = (room) => console.log(room);
-  const onCancel = () => console.log('cancel');
+export default function RoomCreationScreenWrapper(props) {
+  const onCreateRoom = (room) => {
+    props.setRoomUuid('lala');
+  };
 
   return (
     <RoomCreationScreen
-      onCancel={onCancel}
       onCreateRoom={onCreateRoom}
     />
   );

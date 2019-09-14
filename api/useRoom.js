@@ -8,6 +8,7 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ error: '' });
   const [roomId, setRoomId] = useState('');
+  const [gameStarted, changeGameStarted] = useState('');
 
 
   useEffect(() => {
@@ -35,5 +36,5 @@ export default () => {
     };
   }, [roomId]);
 
-  return [userId, loading, error, setRoomId];
+  return [userId, loading, error, setRoomId, gameStarted];
 };

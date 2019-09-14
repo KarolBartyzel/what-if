@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Socket } from './PhoenixChannels';
 
-const apiUrl = 'http://192.168.1.30:4000';
+const apiUrl = 'http://172.20.10.3:4000';
 
 export default () => {
   const [userId, setUserId] = useState('');

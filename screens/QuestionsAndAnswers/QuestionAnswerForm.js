@@ -6,24 +6,25 @@ import {
 import { TextInput } from 'react-native-paper';
 
 
-export default function HomeScreen({questionPrefix, question, answer, setAnswer, setQuestion}) {
-
+export default function HomeScreen({
+  questionPrefix, question, answer, setAnswer, setQuestion,
+}) {
   return (
     <View>
       <TextInput
         label={`${questionPrefix}...`}
         value={question}
-        mode={'outlined'}
-        onChangeText={text => {
+        mode="outlined"
+        onChangeText={(text) => {
           if (text.length === 0) setAnswer('');
-          setQuestion(text.toLowerCase())
+          setQuestion(text.toLowerCase());
         }}
       />
 
       <TextInput
         label={`${questionPrefix} ${question}`}
         value={answer}
-        mode={'outlined'}
+        mode="outlined"
         onChangeText={setAnswer}
         disabled={question.length === 0}
         multiline

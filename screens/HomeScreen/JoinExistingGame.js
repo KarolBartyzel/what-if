@@ -6,50 +6,50 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import PropTypes from 'prop-types';
 
 export default function JoinExistingGame(props) {
-	const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
-	const [isScanned, setIsScanned] = React.useState(false);
+  const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
+  const [isScanned, setIsScanned] = React.useState(false);
 
-	async function askForCameraPermission() {
-		const { status } = await Permissions.askAsync(Permissions.CAMERA);
-		setHasCameraPermission(status === 'granted');
-	}
+  async function askForCameraPermission() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    setHasCameraPermission(status === 'granted');
+  }
 
-	React.useEffect(() => {
-		askForCameraPermission();
-	}, []);
+  React.useEffect(() => {
+    askForCameraPermission();
+  }, []);
 
-	function handleBarCodeScanned ({ type, data: roomUuid }) {
-		setIsScanned(true);
-		// props.navigate('QuestionsAndAnswers', { roomUuid });
-		props.navigate('Links', { roomUuid });
-	};
+  function handleBarCodeScanned({ type, data: roomUuid }) {
+    setIsScanned(true);
+    // props.navigate('QuestionsAndAnswers', { roomUuid });
+    props.navigate('Links', { roomUuid });
+  }
 
-	return (
-		<View style={styles.joinExistingGame}>
-			{hasCameraPermission === null && (
-				<Text>Requesting for camera permission</Text>
-			)}
-			{hasCameraPermission === false && (
-				<Text>No access to camera</Text>
-			)}
-			{hasCameraPermission === true && (
-				<BarCodeScanner
-					onBarCodeScanned={isScanned ? undefined : handleBarCodeScanned}
-					style={StyleSheet.absoluteFillObject}
-				/>
-			)}
-		</View>
-	)
+  return (
+    <View style={styles.joinExistingGame}>
+      {hasCameraPermission === null && (
+      <Text>Requesting for camera permission</Text>
+      )}
+      {hasCameraPermission === false && (
+      <Text>No access to camera</Text>
+      )}
+      {hasCameraPermission === true && (
+      <BarCodeScanner
+        onBarCodeScanned={isScanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
+      )}
+    </View>
+  );
 }
 
 JoinExistingGame.propTypes = {
-    navigate: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
-	joinExistingGame: {
-		height: 300,
-		width: 300,
-		margin: 20
-	},
+  joinExistingGame: {
+    height: 300,
+    width: 300,
+    margin: 20,
+  },
 });

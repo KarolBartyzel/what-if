@@ -16,7 +16,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
   },
-  config
+  config,
 );
 
 HomeStack.navigationOptions = {
@@ -39,7 +39,7 @@ const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
   },
-  config
+  config,
 );
 
 LinksStack.navigationOptions = {
@@ -55,7 +55,7 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
-  config
+  config,
 );
 
 SettingsStack.navigationOptions = {

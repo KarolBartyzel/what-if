@@ -37,8 +37,8 @@ export default function RoomCreationScreen({ onCreateRoom }) {
             General
           </Subheading>
           <TextInput
-            label='Room name'
-            onChangeText={text => setRoomName(text)}
+            label="Room name"
+            onChangeText={(text) => setRoomName(text)}
             value={roomName}
           />
           <Subheading>
@@ -55,7 +55,7 @@ export default function RoomCreationScreen({ onCreateRoom }) {
               roomName,
               questions: getQuestionArray(questionObject),
             })}
-            mode='contained'
+            mode="contained"
           >
               Create
           </Button>
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     padding: 8,
-    width: '100%'
+    width: '100%',
   },
   card: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 });

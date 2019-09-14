@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 
+import { Button, ProgressBar } from 'react-native-paper';
 import QuestionAnswerForm from './QuestionAnswerForm';
-import { Button, ProgressBar } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,11 +18,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40,
-  }
+  },
 });
 
-export default function() {
-
+export default function () {
   const [currentQuestionPrefixIndex, setCurrentQuestionPrefixIndex] = useState(0);
   const [userAnswers, setUserAnswears] = useState({});
   const [question, setQuestion] = useState('');
@@ -31,19 +30,19 @@ export default function() {
   const questions = [
     'What if',
     'Why',
-    'How'
+    'How',
   ];
 
   const currentQuestionPrefix = questions[currentQuestionPrefixIndex];
 
   const handleQuestion = () => {
-    if(Object.keys(userAnswers).length === questions.length) return;
+    if (Object.keys(userAnswers).length === questions.length) return;
     setUserAnswears({
       ...userAnswers,
       [currentQuestionPrefix]: {
         question,
         answer,
-      }
+      },
     });
     setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questions.length - 1));
     setQuestion('');
@@ -62,27 +61,30 @@ export default function() {
         />
 
         {
-          currentQuestionPrefixIndex === questions.length - 1 ?
-            <Button
-              mode="contained"
-              style={styles.button}
-              disabled={question.length * answer.length === 0}
-            >
+          currentQuestionPrefixIndex === questions.length - 1
+            ? (
+              <Button
+                mode="contained"
+                style={styles.button}
+                disabled={question.length * answer.length === 0}
+              >
               Submit Answers
-            </Button>
-            :
-            <Button
-              mode="contained"
-              style={styles.button}
-              onPress={handleQuestion}
-              disabled={question.length * answer.length === 0}
-            >
+              </Button>
+            )
+            : (
+              <Button
+                mode="contained"
+                style={styles.button}
+                onPress={handleQuestion}
+                disabled={question.length * answer.length === 0}
+              >
               Next question
-            </Button>
+              </Button>
+            )
         }
       </View>
       <ProgressBar
-        progress={(currentQuestionPrefixIndex + 1)/questions.length}
+        progress={(currentQuestionPrefixIndex + 1) / questions.length}
         indeterminate
       />
     </View>

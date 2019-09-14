@@ -7,18 +7,18 @@ import {
   withTheme,
 } from 'react-native-paper';
 
+import { StyleSheet } from 'react-native';
 import { questionOptions } from './questionOptionsUtils';
-import { StyleSheet } from "react-native";
 
 export default function QuestionOptions({
   onQuestionOptionPress,
   questionObject,
 }) {
-  return questionOptions.map(questionOption => (
+  return questionOptions.map((questionOption) => (
     <Chip
       key={questionOption}
       onPress={onQuestionOptionPress(questionOption)}
-      mode='outlined'
+      mode="outlined"
       selected={questionObject[questionOption]}
       style={styles.chip}
     >

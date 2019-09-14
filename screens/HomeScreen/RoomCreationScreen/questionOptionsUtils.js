@@ -17,5 +17,5 @@ export function getInitialQuestionObject() {
 export function getQuestionArray(questionObject) {
   return Object
     .keys(questionObject)
-    .filter(questionOption => questionObject[questionOption]);
+    .filter((questionOption) => questionObject[questionOption]);
 }

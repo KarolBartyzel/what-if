@@ -18,7 +18,7 @@ export default function CreateNewGame(props) {
 
   function handleStartGame() {
     broadcastGameStart();
-    props.navigate('QuestionsAndAnswers', { roomUuid });
+    props.navigate('QuestionsAndAnswers');
   }
 
   return (

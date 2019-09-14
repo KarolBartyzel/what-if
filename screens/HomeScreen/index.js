@@ -2,20 +2,24 @@ import React, { useContext } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
+import { RoomContext } from '../../api/RoomContext';
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
 import { RoomContext } from '../../api/RoomContext';
 
-
 export default function StartGameScreen(props) {
   const [isNewGame, setIsNewGame] = React.useState(true);
+  const {
+    setRoomId,
+  } = React.useContext(RoomContext);
 
   function handleJoinExistingGame() {
+    setRoomId('');
     setIsNewGame(false);
-    // setIsJoinExistingGameOpen(true);
   }
 
   function handleCreateNewGame() {
+    setRoomId('');
     setIsNewGame(true);
   }
 

@@ -32,10 +32,7 @@ export default () => {
         setError({ error: reason });
       });
 
-    channel.on('game_started', () => {
-      changeGameStarted(true)
-      console.log('XDDDD')
-    });
+    channel.on('game_started', () => changeGameStarted(true));
 
     return () => {
       channel.leave();

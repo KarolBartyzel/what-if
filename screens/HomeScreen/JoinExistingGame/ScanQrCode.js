@@ -4,31 +4,26 @@ import { Text } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import PropTypes from 'prop-types';
-import {RoomContext} from "../../api/RoomContext";
+import { RoomContext } from '../../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
 export default function JoinExistingGame(props) {
   const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
-  const [isScanned, setIsScanned] = React.useState(false);
+  const { setRoomId } = useContext(RoomContext);
 
   async function askForCameraPermission() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     setHasCameraPermission(status === 'granted');
   }
 
-  const {
-    setRoomId,
-  } = useContext(RoomContext);
-
   React.useEffect(() => {
     askForCameraPermission();
   }, []);
 
   function handleBarCodeScanned({ type, data: roomUuid }) {
-    setIsScanned(true);
-    setRoomId(roomUuid)
-    props.navigate('QuestionsAndAnswers', { roomUuid });
+    setRoomId(roomUuid);
+    props.setIsScanned(true);
   }
 
   return (
@@ -41,7 +36,7 @@ export default function JoinExistingGame(props) {
       )}
       {hasCameraPermission === true && (
       <BarCodeScanner
-        onBarCodeScanned={isScanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         style={[StyleSheet.absoluteFill, styles.joinExistingGame]}
       >
         <View style={styles.barCodeScannerContainer}>

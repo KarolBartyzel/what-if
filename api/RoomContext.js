@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const ATMContext = React.createContext();
+export const RoomContext = React.createContext();

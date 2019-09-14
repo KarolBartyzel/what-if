@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Dimensions, StyleSheet, View, Image  } from 'react-native';
 import { Text } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import PropTypes from 'prop-types';
+import {RoomContext} from "../../api/RoomContext";
 
 const { width } = Dimensions.get('window');
 
@@ -16,12 +17,17 @@ export default function JoinExistingGame(props) {
     setHasCameraPermission(status === 'granted');
   }
 
+  const {
+    setRoomId,
+  } = useContext(RoomContext);
+
   React.useEffect(() => {
     askForCameraPermission();
   }, []);
 
   function handleBarCodeScanned({ type, data: roomUuid }) {
     setIsScanned(true);
+    setRoomId('roomUuid')
     props.navigate('QuestionsAndAnswers', { roomUuid });
   }
 

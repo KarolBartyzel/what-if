@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Chip,
   Text,
-  withTheme,
 } from 'react-native-paper';
 
 import { StyleSheet } from 'react-native';

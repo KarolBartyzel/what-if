@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 import {
   Button,
   Card,
   Subheading,
-  Text,
   TextInput,
 } from 'react-native-paper';
 
 import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUtils';
 
 import QuestionOptions from './QuestionOptions';
+import ApiHelper from '../../../api/ApiHelper';
+import { RoomContext } from '../../../api/RoomContext';
 
 export default function RoomCreationScreen(props) {
   const [roomName, setRoomName] = useState('');
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
+
+  const {
+    setRoomId,
+  } = useContext(RoomContext);
 
   const onQuestionOptionPress = (questionOption) => () => setQuestionObject({
     ...questionObject,
@@ -27,38 +31,42 @@ export default function RoomCreationScreen(props) {
   });
 
   const onCreateRoom = (room) => {
-    props.setRoomUuid('lala');
+    ApiHelper.createRoom('XD', ['123'])
+      .then((uuid) => {
+        setRoomId(uuid);
+        props.setRoomUuid(uuid);
+      });
   };
 
   return (
     <View style={styles.container}>
-          <Subheading>
+      <Subheading>
             General
-          </Subheading>
-          <TextInput
-            label="Room name"
-            onChangeText={(text) => setRoomName(text)}
-            value={roomName}
-          />
-          <Subheading>
+      </Subheading>
+      <TextInput
+        label="Room name"
+        onChangeText={(text) => setRoomName(text)}
+        value={roomName}
+      />
+      <Subheading>
             Questions
-          </Subheading>
-          <QuestionOptions
-            onQuestionOptionPress={onQuestionOptionPress}
-            questionObject={questionObject}
-          />
-        <Card.Actions>
-          <Button
-            onPress={() => onCreateRoom({
-              roomName,
-              questions: getQuestionArray(questionObject),
-            })}
-            mode="contained"
-          >
+      </Subheading>
+      <QuestionOptions
+        onQuestionOptionPress={onQuestionOptionPress}
+        questionObject={questionObject}
+      />
+      <Card.Actions>
+        <Button
+          onPress={() => onCreateRoom({
+            roomName,
+            questions: getQuestionArray(questionObject),
+          })}
+          mode="contained"
+        >
               Create
-          </Button>
+        </Button>
 
-        </Card.Actions>
+      </Card.Actions>
     </View>
   );
 }

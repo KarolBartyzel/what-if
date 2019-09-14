@@ -4,7 +4,7 @@ import { Button, Card } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
-import ApiHelper from "../../api/ApiHelper";
+
 
 export default function StartGameScreen(props) {
   const [isNewGame, setIsNewGame] = React.useState(true);

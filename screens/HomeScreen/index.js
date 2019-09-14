@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   tabSwitch: {
     flexDirection: 'row',
+    marginTop: 50
   },
   tabContent: {
-    height: '50%',
     width: '100%',
+    alignItems: 'center',
   },
 });

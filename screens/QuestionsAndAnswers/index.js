@@ -58,7 +58,7 @@ export default function ({ navigation }) {
       },
     });
 
-    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questions.length - 1));
+    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1));
     setQuestion('');
     setAnswer('');
 

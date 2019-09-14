@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Socket } from './PhoenixChannels';
 
-const apiUrl = 'http://172.20.10.3:4000';
+const apiUrl = 'https://hidden-hollows-14760.herokuapp.com';
 
 export default () => {
   const [userId, setUserId] = useState('');
@@ -10,6 +10,8 @@ export default () => {
   const [roomId, setRoomId] = useState('');
   const [gameStarted, changeGameStarted] = useState('');
   const [room, changeRoom] = useState('');
+  const [questionsPrefixes, setQuestionsPrefixes] = useState('');
+  const [roomName, seRoomName] = useState('');
 
 
   useEffect(() => {
@@ -18,9 +20,12 @@ export default () => {
     socket.connect();
     const channel = socket.channel(`room:${roomId}`, { username: 'dupa' });
     channel.join()
-      .receive('ok', ({ user_id }) => {
+      .receive('ok', ({ user_id, questions_prefixes, room_name }) => {
+        console.log(user_id, questions_prefixes, room_name )
         changeRoom(channel);
         setUserId(user_id);
+        setQuestionsPrefixes(questions_prefixes);
+        seRoomName(room_name);
         setLoading(false);
       })
       .receive('error', ({ reason }) => {
@@ -43,5 +48,5 @@ export default () => {
     room.push('start_game', {}, 10000);
   };
 
-  return [userId, loading, error, setRoomId, gameStarted, broadcastGameStart];
+  return [userId, loading, error, setRoomId, gameStarted, broadcastGameStart, questionsPrefixes, roomName];
 };

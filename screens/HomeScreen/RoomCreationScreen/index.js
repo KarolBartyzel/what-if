@@ -33,7 +33,7 @@ export default function RoomCreationScreen(props) {
   });
 
   const onCreateRoom = (room) => {
-    ApiHelper.createRoom('XD', ['123'])
+    ApiHelper.createRoom('XD', ['What if', 'Why', 'How'])
       .then((uuid) => {
         setRoomId(uuid);
         props.setRoomUuid(uuid);

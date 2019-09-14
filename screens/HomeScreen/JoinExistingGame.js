@@ -48,7 +48,6 @@ JoinExistingGame.propTypes = {
 
 const styles = StyleSheet.create({
 	joinExistingGame: {
-		display: 'flex',
 		height: 300,
 		width: 300,
 		margin: 20

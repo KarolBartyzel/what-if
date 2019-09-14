@@ -77,7 +77,6 @@ RoomCreationScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     backgroundColor: '#fff',
     padding: 8,
     width: '100%'

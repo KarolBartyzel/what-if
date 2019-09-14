@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   StyleSheet,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function () {
+export default function ({ navigation }) {
   const [currentQuestionPrefixIndex, setCurrentQuestionPrefixIndex] = useState(0);
   const [userAnswers, setUserAnswears] = useState({});
   const [question, setQuestion] = useState('');
@@ -47,6 +47,27 @@ export default function () {
     setAnswer('');
   };
 
+  const submit = () => {
+    if (question.length * answer.length === 0) return;
+    const {
+      sendQuestionsAnswers,
+    } = useContext(RoomContext);
+    const userAnswers = ({
+      ...userAnswers,
+      [currentQuestionPrefix]: {
+        question,
+        answer,
+      },
+    });
+
+    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questions.length - 1));
+    setQuestion('');
+    setAnswer('');
+
+    sendQuestionsAnswers(userAnswers);
+    navigation.navigate('AwaitPlayerAnswers');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputs}>
@@ -65,8 +86,9 @@ export default function () {
                 mode="contained"
                 style={styles.button}
                 disabled={question.length * answer.length === 0}
+                onPress={submit}
               >
-              Submit Answers
+                Submit Answers
               </Button>
             )
             : (

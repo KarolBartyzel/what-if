@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 
 import ResultScreen from './ResultScreen';
+import { RoomContext } from '../../api/RoomContext';
 
 export default function ResultScreenWrapper(props) {
-  const { results } = props;
+  const { navigation } = props;
 
-  const onClose = () => console.log('Close results');
+  const {
+    answersObject,
+  } = useContext(RoomContext);
+  const { answers: results } = answersObject;
+
+  const onClose = () => navigation.navigate('Home');
 
   return (
     <ResultScreen
@@ -16,12 +22,5 @@ export default function ResultScreenWrapper(props) {
   );
 }
 
-ResultScreenWrapper.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.shape({
-    question: PropTypes.string,
-    answer: PropTypes.string,
-  })),
-};
-ResultScreenWrapper.defaultProps = {
-  results: [],
-};
+ResultScreenWrapper.propTypes = {};
+ResultScreenWrapper.defaultProps = {};

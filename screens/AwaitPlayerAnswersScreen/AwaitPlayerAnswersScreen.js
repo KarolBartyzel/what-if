@@ -12,7 +12,7 @@ export default function AwaitPlayerAnswersScreen({}) {
     answersObject,
   } = useContext(RoomContext);
 
-  const allUsersAnswered = answersObject.answeredUsers === 'all_answered';
+  const allUsersAnswered = answersObject.answered_users === 'all_answered';
 
   if (allUsersAnswered) {
     navigation.navigate('Results');
@@ -29,7 +29,7 @@ export default function AwaitPlayerAnswersScreen({}) {
           <Text>
             Awaiting users...
           </Text>
-          {answersObject.answeredUsers.map((answeredUser) => (
+          {answersObject.answered_users.map((answeredUser) => (
             <Text
               key={answeredUser.id}
             >

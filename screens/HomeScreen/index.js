@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
+import { RoomContext } from '../../api/RoomContext';
 
 
 export default function StartGameScreen(props) {
@@ -17,8 +18,6 @@ export default function StartGameScreen(props) {
   function handleCreateNewGame() {
     setIsNewGame(true);
   }
-
-
 
   return (
     <View style={styles.startGameScreen}>

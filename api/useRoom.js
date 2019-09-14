@@ -12,15 +12,14 @@ export default () => {
   const [room, changeRoom] = useState('');
 
 
-
   useEffect(() => {
-    if(roomId === '') return;
+    if (roomId === '') return;
     const socket = new Socket(`${apiUrl}/socket`, { params: {} });
     socket.connect();
     const channel = socket.channel(`room:${roomId}`, { username: 'dupa' });
     channel.join()
       .receive('ok', ({ user_id }) => {
-        changeRoom(channel)
+        changeRoom(channel);
         setUserId(user_id);
         setLoading(false);
       })
@@ -33,13 +32,19 @@ export default () => {
         setError({ error: reason });
       });
 
-    channel.on("game_started", () => changeGameStarted(true));
+    channel.on('game_started', () => {
+      changeGameStarted(true)
+      console.log('XDDDD')
+    });
 
     return () => {
       channel.leave();
     };
   }, [roomId]);
 
+  const broadcastGameStart = () => {
+    room.push('start_game', {}, 10000);
+  };
 
-  return [userId, loading, error, setRoomId, gameStarted];
+  return [userId, loading, error, setRoomId, gameStarted, broadcastGameStart];
 };

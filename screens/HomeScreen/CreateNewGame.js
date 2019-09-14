@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
 
 import RoomCreationScreen from './RoomCreationScreen';
+import { RoomContext } from '../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
 export default function CreateNewGame(props) {
   const [roomUuid, setRoomUuid] = React.useState(null);
 
+  const {
+    broadcastGameStart,
+  } = useContext(RoomContext);
+
   function handleStartGame() {
+    broadcastGameStart();
     props.navigate('QuestionsAndAnswers', { roomUuid });
   }
 

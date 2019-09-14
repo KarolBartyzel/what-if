@@ -4,7 +4,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import QuestionAnswearForm from './QuestionAnswearForm';
+import QuestionAnswerForm from './QuestionAnswerForm';
 import { Button, ProgressBar } from "react-native-paper";
 
 const styles = StyleSheet.create({
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
 export default function() {
 
   const [currentQuestionPrefixIndex, setCurrentQuestionPrefixIndex] = useState(0);
-  const [userAnswears, setUserAnswears] = useState({});
+  const [userAnswers, setUserAnswears] = useState({});
   const [question, setQuestion] = useState('');
-  const [answear, setAnswear] = useState('');
+  const [answer, setAnswer] = useState('');
 
   const questions = [
     'What if',
@@ -37,27 +37,27 @@ export default function() {
   const currentQuestionPrefix = questions[currentQuestionPrefixIndex];
 
   const handleQuestion = () => {
-    if(Object.keys(userAnswears).length === questions.length) return;
+    if(Object.keys(userAnswers).length === questions.length) return;
     setUserAnswears({
-      ...userAnswears,
+      ...userAnswers,
       [currentQuestionPrefix]: {
         question,
-        answear,
+        answer,
       }
     });
     setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questions.length - 1));
     setQuestion('');
-    setAnswear('');
+    setAnswer('');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputs}>
-        <QuestionAnswearForm
+        <QuestionAnswerForm
           questionPrefix={currentQuestionPrefix}
           question={question}
-          answear={answear}
-          setAnswear={setAnswear}
+          answer={answer}
+          setAnswer={setAnswer}
           setQuestion={setQuestion}
         />
 
@@ -66,16 +66,16 @@ export default function() {
             <Button
               mode="contained"
               style={styles.button}
-              disabled={question.length * answear.length === 0}
+              disabled={question.length * answer.length === 0}
             >
-              Submit Answears
+              Submit Answers
             </Button>
             :
             <Button
               mode="contained"
               style={styles.button}
               onPress={handleQuestion}
-              disabled={question.length * answear.length === 0}
+              disabled={question.length * answer.length === 0}
             >
               Next question
             </Button>

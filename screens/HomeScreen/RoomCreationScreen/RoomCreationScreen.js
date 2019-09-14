@@ -17,7 +17,7 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 
 import QuestionOptions from './QuestionOptions';
 
-export default function RoomCreationScreen({ onCreateRoom }) {
+export default function RoomCreationScreen({ errorMessage, onCreateRoom }) {
   const [roomName, setRoomName] = useState('');
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
@@ -48,6 +48,13 @@ export default function RoomCreationScreen({ onCreateRoom }) {
             onQuestionOptionPress={onQuestionOptionPress}
             questionObject={questionObject}
           />
+          {errorMessage
+            ? (
+              <Text>
+                {errorMessage}
+              </Text>
+            )
+            : null}
         </Card.Content>
         <Card.Actions>
           <Button
@@ -67,9 +74,12 @@ export default function RoomCreationScreen({ onCreateRoom }) {
 }
 
 RoomCreationScreen.propTypes = {
+  errorMessage: PropTypes.string,
   onCreateRoom: PropTypes.func.isRequired,
 };
-RoomCreationScreen.defaultProps = {};
+RoomCreationScreen.defaultProps = {
+  errorMessage: null,
+};
 
 RoomCreationScreen.navigationOptions = {
   title: 'Create room',

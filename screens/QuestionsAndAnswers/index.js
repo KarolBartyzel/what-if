@@ -6,6 +6,7 @@ import {
 
 import { Button, ProgressBar } from 'react-native-paper';
 import QuestionAnswerForm from './QuestionAnswerForm';
+import { RoomContext } from '../../api/RoomContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,17 +27,14 @@ export default function () {
   const [userAnswers, setUserAnswears] = useState({});
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const {
+    questionsPrefixes,
+  } = React.useContext(RoomContext);
 
-  const questions = [
-    'What if',
-    'Why',
-    'How',
-  ];
-
-  const currentQuestionPrefix = questions[currentQuestionPrefixIndex];
+  const currentQuestionPrefix = questionsPrefixes[currentQuestionPrefixIndex];
 
   const handleQuestion = () => {
-    if (Object.keys(userAnswers).length === questions.length) return;
+    if (Object.keys(userAnswers).length === questionsPrefixes.length) return;
     setUserAnswears({
       ...userAnswers,
       [currentQuestionPrefix]: {
@@ -44,7 +42,7 @@ export default function () {
         answer,
       },
     });
-    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questions.length - 1));
+    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1));
     setQuestion('');
     setAnswer('');
   };
@@ -61,7 +59,7 @@ export default function () {
         />
 
         {
-          currentQuestionPrefixIndex === questions.length - 1
+          currentQuestionPrefixIndex === questionsPrefixes.length - 1
             ? (
               <Button
                 mode="contained"
@@ -84,7 +82,7 @@ export default function () {
         }
       </View>
       <ProgressBar
-        progress={(currentQuestionPrefixIndex + 1) / questions.length}
+        progress={(currentQuestionPrefixIndex + 1) / questionsPrefixes.length}
         indeterminate
       />
     </View>

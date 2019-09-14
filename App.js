@@ -17,7 +17,7 @@ const theme = {
 };
 
 export default function App(props) {
-  const [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName] = useRoom();
+  const [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername] = useRoom();
 
   return (
     <RoomContext.Provider value={{
@@ -31,6 +31,8 @@ export default function App(props) {
       questionsPrefixes,
       roomName,
       sendQuestionsAnswers,
+      username,
+      setUsername,
     }}
     >
       <PaperProvider theme={theme}>

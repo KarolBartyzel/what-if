@@ -13,13 +13,13 @@ export default () => {
   const [questionsPrefixes, setQuestionsPrefixes] = useState('');
   const [roomName, seRoomName] = useState('');
   const [answersObject, setAnswersObject] = useState({ answered_users: [], answers: null });
-
+  const [username, setUsername] = useState('doopzko');
 
   useEffect(() => {
     if (roomId === '') return;
     const socket = new Socket(`${apiUrl}/socket`, { params: {} });
     socket.connect();
-    const channel = socket.channel(`room:${roomId}`, { username: 'dupa' });
+    const channel = socket.channel(`room:${roomId}`, { username });
     channel.join()
       .receive('ok', ({ user_id, questions_prefixes, room_name }) => {
         console.log(user_id, questions_prefixes, room_name )
@@ -71,5 +71,5 @@ export default () => {
     room.push('submit', questionsAnswers, 10000);
   };
 
-  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName];
+  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername];
 };

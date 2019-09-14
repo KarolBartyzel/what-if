@@ -10,8 +10,7 @@ export default function CreateNewGame(props) {
   const [roomUuid, setRoomUuid] = React.useState(null);
 
   function handleStartGame() {
-    // props.navigate('QuestionsAndAnswers', { roomUuid });
-    props.navigate('Links', { roomUuid });
+    props.navigate('QuestionsAndAnswers', { roomUuid });
   }
 
   return (

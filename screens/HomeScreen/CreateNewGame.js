@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, ActivityIndicator } from 'react-native-paper';
+import { StyleSheet, Dimensions } from 'react-native';
+import { Button, Card } from 'react-native-paper';
 import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
 
-import RoomCreationScreen from './RoomCreationScreen/RoomCreationScreenWrapper';
+import RoomCreationScreen from './RoomCreationScreen';
+
+const { width } = Dimensions.get('window');
 
 export default function CreateNewGame(props) {
   const [roomUuid, setRoomUuid] = React.useState(null);
@@ -14,39 +16,52 @@ export default function CreateNewGame(props) {
   }
 
   return (
-    <View style={styles.createNewGame}>
+    <>
       {!roomUuid && (
-      <RoomCreationScreen setRoomUuid={setRoomUuid} />
+        <RoomCreationScreen setRoomUuid={setRoomUuid} />
       )}
-      {roomUuid && (
-      <>
+      <Card.Content style={styles.createNewGame}>
+        {roomUuid && (
         <QRCode
           value={roomUuid}
-          size={300}
+          size={width - 10}
         />
+        )}
+      </Card.Content>
+      <Card.Actions style={styles.actions}>
+        {roomUuid && (
         <Button
           style={styles.startGameButton}
-					// icon="new"
+          contentStyle={styles.startGameButtonContent}
           mode="contained"
           onPress={handleStartGame}
         >
-					Start Game
+          Start Game
         </Button>
-      </>
-      )}
-    </View>
+        )}
+      </Card.Actions>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   createNewGame: {
     marginTop: 20,
-    width: '100%',
+    width,
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
   },
   startGameButton: {
-    marginTop: 20,
+    width: 200,
+  },
+  startGameButtonContent: {
+    padding: 5,
+  },
+  actions: {
+    width,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
 });
 

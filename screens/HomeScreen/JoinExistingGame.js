@@ -1,9 +1,12 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useContext } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import PropTypes from 'prop-types';
+import {RoomContext} from "../../api/RoomContext";
+
+const { width } = Dimensions.get('window');
 
 export default function JoinExistingGame(props) {
   const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
@@ -14,12 +17,17 @@ export default function JoinExistingGame(props) {
     setHasCameraPermission(status === 'granted');
   }
 
+  const {
+    setRoomId,
+  } = useContext(RoomContext);
+
   React.useEffect(() => {
     askForCameraPermission();
   }, []);
 
   function handleBarCodeScanned({ type, data: roomUuid }) {
     setIsScanned(true);
+    setRoomId('roomUuid')
     props.navigate('QuestionsAndAnswers', { roomUuid });
   }
 
@@ -34,8 +42,14 @@ export default function JoinExistingGame(props) {
       {hasCameraPermission === true && (
       <BarCodeScanner
         onBarCodeScanned={isScanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
+        style={[StyleSheet.absoluteFill, styles.joinExistingGame]}
+      >
+        <View style={styles.barCodeScannerContainer}>
+          <View style={styles.barCodeScannerOpacity} />
+          <View style={styles.barCodeScannerNoOpacity} />
+          <View style={styles.barCodeScannerOpacity} />
+        </View>
+      </BarCodeScanner>
       )}
     </View>
   );
@@ -47,8 +61,20 @@ JoinExistingGame.propTypes = {
 
 const styles = StyleSheet.create({
   joinExistingGame: {
-    height: 300,
-    width: 300,
-    margin: 20,
+    width,
+    height: '100%',
+  },
+  barCodeScannerContainer: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    flexDirection: 'column',
+  },
+  barCodeScannerOpacity: {
+    backgroundColor: 'rgba(0, 0, 0, .6)',
+    flex: 1,
+  },
+  barCodeScannerNoOpacity: {
+    height: width,
   },
 });

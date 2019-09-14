@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 import {
   Button,
@@ -17,7 +16,7 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 
 import QuestionOptions from './QuestionOptions';
 
-export default function RoomCreationScreen({ onCreateRoom }) {
+export default function RoomCreationScreen(props) {
   const [roomName, setRoomName] = useState('');
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
@@ -26,13 +25,12 @@ export default function RoomCreationScreen({ onCreateRoom }) {
     [questionOption]: !questionObject[questionOption],
   });
 
+  const onCreateRoom = (room) => {
+    props.setRoomUuid('lala');
+  };
+
   return (
     <View style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title
-          title={<Text>Room settings</Text>}
-        />
-        <Card.Content>
           <Subheading>
             General
           </Subheading>
@@ -48,7 +46,6 @@ export default function RoomCreationScreen({ onCreateRoom }) {
             onQuestionOptionPress={onQuestionOptionPress}
             questionObject={questionObject}
           />
-        </Card.Content>
         <Card.Actions>
           <Button
             onPress={() => onCreateRoom({
@@ -61,19 +58,12 @@ export default function RoomCreationScreen({ onCreateRoom }) {
           </Button>
 
         </Card.Actions>
-      </Card>
     </View>
   );
 }
 
-RoomCreationScreen.propTypes = {
-  onCreateRoom: PropTypes.func.isRequired,
-};
+RoomCreationScreen.propTypes = {};
 RoomCreationScreen.defaultProps = {};
-
-RoomCreationScreen.navigationOptions = {
-  title: 'Create room',
-};
 
 const styles = StyleSheet.create({
   container: {

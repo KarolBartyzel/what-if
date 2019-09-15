@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
   actions: {
     position: 'absolute',
     bottom: 0,
+    zIndex: 10,
     width,
     alignItems: 'flex-end',
     justifyContent: 'center',

@@ -14,6 +14,7 @@ export default () => {
   const [roomName, seRoomName] = useState('');
   const [answersObject, setAnswersObject] = useState({ answered_users: [], answers: null });
   const [username, setUsername] = useState('doopzko');
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     if (roomId === '') return;
@@ -44,6 +45,10 @@ export default () => {
       setAnswersObject(newAnswersObject);
     });
 
+    channel.on('users_update', ({ newUsers }) => {
+      setUsers(newUsers);
+    });
+
     return () => {
       channel.leave();
     };
@@ -71,5 +76,5 @@ export default () => {
     room.push('submit', questionsAnswers, 10000);
   };
 
-  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername];
+  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername, users];
 };

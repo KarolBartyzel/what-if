@@ -9,7 +9,7 @@ export default () => {
   const [error, setError] = useState({ error: '' });
   const [roomId, setRoomId] = useState('');
   const [gameStarted, changeGameStarted] = useState('');
-  const [room, changeRoom] = useState('');
+  const [room, changeRoom] = useState(null);
   const [questionsPrefixes, setQuestionsPrefixes] = useState('');
   const [roomName, seRoomName] = useState('');
   const [answersObject, setAnswersObject] = useState({ answered_users: [], answers: null });
@@ -55,7 +55,7 @@ export default () => {
   }, [roomId]);
 
   const broadcastGameStart = () => {
-    room.push('start_game', {}, 10000);
+    if(room) room.push('start_game', {}, 10000);
   };
 
   const sendQuestionsAnswers = (questionsAnswersByPrefix) => {

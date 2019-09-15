@@ -7,7 +7,6 @@ import {
   List,
   Text,
 } from 'react-native-paper';
-
 import {
   ScrollView,
   StyleSheet,

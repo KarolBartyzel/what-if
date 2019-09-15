@@ -4,6 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { SafeAreaView } from 'react-navigation';
 import { Button, ProgressBar } from 'react-native-paper';
 import QuestionAnswerForm from './QuestionAnswerForm';
 import { RoomContext } from '../../api/RoomContext';
@@ -67,7 +68,7 @@ export default function ({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.inputs}>
         <QuestionAnswerForm
           questionPrefix={currentQuestionPrefix}
@@ -76,7 +77,6 @@ export default function ({ navigation }) {
           setAnswer={setAnswer}
           setQuestion={setQuestion}
         />
-
         {
           currentQuestionPrefixIndex === questionsPrefixes.length - 1
             ? (
@@ -105,6 +105,6 @@ export default function ({ navigation }) {
         progress={(currentQuestionPrefixIndex + 1) / questionsPrefixes.length}
         indeterminate
       />
-    </View>
+    </SafeAreaView>
   );
 }

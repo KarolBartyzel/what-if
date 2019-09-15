@@ -14,6 +14,9 @@ const MainTabNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      header: null,
+    },
   },
 );
 

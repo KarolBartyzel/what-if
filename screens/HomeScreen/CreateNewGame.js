@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import RoomCreationScreen from './RoomCreationScreen';
 import { RoomContext } from '../../api/RoomContext';
-
+import { SafeAreaView } from 'react-navigation';
 const { width } = Dimensions.get('window');
 
 export default function CreateNewGame(props) {
@@ -22,7 +22,7 @@ export default function CreateNewGame(props) {
   }
 
   return (
-    <>
+    <SafeAreaView>
       {!roomUuid && (
         <RoomCreationScreen setRoomUuid={setRoomUuid} />
       )}
@@ -46,7 +46,7 @@ export default function CreateNewGame(props) {
         </Button>
         )}
       </Card.Actions>
-    </>
+    </SafeAreaView>
   );
 }
 

@@ -45,7 +45,7 @@ export default () => {
       setAnswersObject(newAnswersObject);
     });
 
-    channel.on('users_update', ({ newUsers }) => {
+    channel.on('users_update', ({ users: newUsers }) => {
       setUsers(newUsers);
     });
 

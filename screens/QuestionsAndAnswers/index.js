@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  View,
+  ScrollView,
   StyleSheet,
 } from 'react-native';
 
@@ -69,7 +69,10 @@ export default function ({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.inputs}>
+      <ScrollView
+        style={styles.inputs}
+        keyboardShouldPersistTaps="never"
+      >
         <QuestionAnswerForm
           questionPrefix={currentQuestionPrefix}
           question={question}
@@ -100,7 +103,7 @@ export default function ({ navigation }) {
               </Button>
             )
         }
-      </View>
+      </ScrollView>
       <ProgressBar
         progress={(currentQuestionPrefixIndex + 1) / questionsPrefixes.length}
         indeterminate

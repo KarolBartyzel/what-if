@@ -15,9 +15,10 @@ export default function HomeScreen({
         label={`${questionPrefix}...`}
         value={question}
         mode="outlined"
+        autoCapitalize={'none'}
         onChangeText={(text) => {
           if (text.length === 0) setAnswer('');
-          setQuestion(text.toLowerCase());
+          setQuestion(text);
         }}
       />
 

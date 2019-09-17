@@ -62,9 +62,11 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
             />
             <ActivityIndicator
               animating
+              style={styles.loader}
             />
             {userList.map((answeredUser) => (
               <Card
+                style={styles.userCard}
                 key={answeredUser.user_id}
               >
                 <Card.Title
@@ -93,6 +95,14 @@ AwaitPlayerAnswersScreen.propTypes = {};
 AwaitPlayerAnswersScreen.defaultProps = {};
 
 const styles = StyleSheet.create({
+  loader: {
+    marginTop: 4,
+    marginBottom: 4,
+  },
+  userCard: {
+    marginTop: 4,
+    marginBottom: 4,
+  },
   userList: {
     flex: 1,
     marginTop: 24,

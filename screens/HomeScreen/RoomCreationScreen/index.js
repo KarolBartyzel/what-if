@@ -14,6 +14,7 @@ import {
 
 import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUtils';
 
+import generateRoomName from './roomNames';
 import QuestionOptions from './QuestionOptions';
 import ApiHelper from '../../../api/ApiHelper';
 import { RoomContext } from '../../../api/RoomContext';
@@ -21,7 +22,7 @@ import { RoomContext } from '../../../api/RoomContext';
 const { width } = Dimensions.get('window');
 
 export default function RoomCreationScreen(props) {
-  const [roomName, setRoomName] = useState('');
+  const [roomName, setRoomName] = useState(generateRoomName());
   const [isTouched, setIsTouched] = React.useState(false);
   const [questionObject, setQuestionObject] = useState(getInitialQuestionObject());
 
@@ -46,11 +47,13 @@ export default function RoomCreationScreen(props) {
     <>
       <Card.Content style={styles.container}>
         <Subheading>
-        General
+          General
         </Subheading>
         <TextInput
           label="Room name"
           onChangeText={(text) => setRoomName(text)}
+          disabled
+          mode="outlined"
           value={roomName}
           error={isTouched && !roomName}
           onBlur={() => {
@@ -63,8 +66,15 @@ export default function RoomCreationScreen(props) {
         >
           Room name is required
         </HelperText>
+
+        <Button
+          onPress={() => setRoomName(generateRoomName())}
+        >
+          Randomize
+        </Button>
+
         <Subheading>
-        Questions
+          Questions
         </Subheading>
         <HelperText
           type="info"

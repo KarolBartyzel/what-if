@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 40,
   },
+  progressBar: {
+    marginTop: 10,
+  },
 });
 
 export default function ({ navigation }) {
@@ -69,6 +72,11 @@ export default function ({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ProgressBar
+        progress={(currentQuestionPrefixIndex + 1) / questionsPrefixes.length}
+        style={styles.progressBar}
+        indeterminate
+      />
       <ScrollView
         style={styles.inputs}
         keyboardShouldPersistTaps="never"
@@ -104,10 +112,6 @@ export default function ({ navigation }) {
             )
         }
       </ScrollView>
-      <ProgressBar
-        progress={(currentQuestionPrefixIndex + 1) / questionsPrefixes.length}
-        indeterminate
-      />
     </SafeAreaView>
   );
 }

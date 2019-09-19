@@ -6,6 +6,9 @@ import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
 import { RoomContext } from '../../api/RoomContext';
 
+import {speak} from 'expo-speech';
+
+
 export default function StartGameScreen(props) {
   const [isNewGame, setIsNewGame] = React.useState(true);
   const {

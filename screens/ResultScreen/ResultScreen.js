@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {speak} from 'expo-speech';
 import {
   Button,
   Card,
   List,
   Text,
+  IconButton,
 } from 'react-native-paper';
 import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
+
+const speakResults = ({question_prefix, question, answer}) => {
+  speak(`${question_prefix} ${question}? ${answer}.`, {language: 'pl'});
+}
 
 export default function ResultScreen({ onClose, results }) {
   return (
@@ -32,12 +37,9 @@ export default function ResultScreen({ onClose, results }) {
               >
                 <Card.Title
                   title={`${result.question_prefix} ${result.question}`}
+                  subtitle={result.answer}
+                  right={() => <IconButton icon='volume-up' onPress={() => speakResults(result)}/>}
                 />
-                <Card.Content>
-                  <Text>
-                    {result.answer}
-                  </Text>
-                </Card.Content>
               </Card>
             ))}
           </List.Section>

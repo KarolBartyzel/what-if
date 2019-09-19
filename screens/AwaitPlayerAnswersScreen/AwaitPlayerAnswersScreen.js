@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-
 import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Avatar, Card, Chip, ProgressBar, Text } from 'react-native-paper';
 
-import { ActivityIndicator, Card, Text } from 'react-native-paper';
+import getRandomAsset from './playerAvatars';
 
 import { RoomContext } from '../../api/RoomContext';
 
@@ -26,12 +26,16 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
       };
     }
 
-    const answeredUserIndex = answersObject.answered_users.findIndex((answeredUser) => answeredUser.user_id === user.user_id);
+    const answeredUserIndex = answersObject
+      .answered_users
+      .findIndex((answeredUser) => answeredUser.user_id === user.user_id);
     return {
       ...user,
       answered: answeredUserIndex !== -1,
     };
   });
+  const answeredUsersCount = userList.filter(user => user.answered).length;
+  const allUsersCount = userList.length;
 
   return allUsersAnswered
     ? (
@@ -60,29 +64,26 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
             <Card.Title
               title="Awaiting users..."
             />
-            <ActivityIndicator
-              animating
+            <ProgressBar
               style={styles.loader}
+              progress={answeredUsersCount / allUsersCount}
+              indeterminate
             />
             {userList.map((answeredUser) => (
-              <Card
-                style={styles.userCard}
+              <Chip
+                style={styles.userChip}
                 key={answeredUser.user_id}
+                selected={answeredUser.answered}
+                mode="outlined"
+                avatar={<Avatar.Image
+                  source={getRandomAsset()}
+                  size={24}
+                />}
               >
-                <Card.Title
-                  title={answeredUser.name}
-                />
-                <Card.Content>
-                  <Text
-                    style={answeredUser.answered ? styles.answeredUser : styles.unansweredUser}
-                  >
-                    {answeredUser.answered
-                      ? ('Answered')
-                      : ('Unanswered')
-                    }
-                  </Text>
-                </Card.Content>
-              </Card>
+                <Text>
+                  {answeredUser.name}
+                </Text>
+              </Chip>
             ))}
           </Card.Content>
         </Card>
@@ -99,9 +100,10 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 4,
   },
-  userCard: {
+  userChip: {
     marginTop: 4,
     marginBottom: 4,
+    padding: 8,
   },
   userList: {
     flex: 1,

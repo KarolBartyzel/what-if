@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Socket } from './PhoenixChannels';
 
+import { adjectives, getRandomInt, usernameNouns } from '../constants/Names';
+
 const apiUrl = 'https://hidden-hollows-14760.herokuapp.com';
+
+function generateUsername() {
+  return `${adjectives[getRandomInt(0, adjectives.length)]} ${usernameNouns[getRandomInt(0, usernameNouns.length)]}`;
+}
 
 export default () => {
   const [userId, setUserId] = useState('');
@@ -13,7 +19,7 @@ export default () => {
   const [questionsPrefixes, setQuestionsPrefixes] = useState('');
   const [roomName, seRoomName] = useState('');
   const [answersObject, setAnswersObject] = useState({ answered_users: [], answers: null });
-  const [username, setUsername] = useState('doopzko');
+  const [username, setUsername] = useState(generateUsername());
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

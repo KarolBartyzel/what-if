@@ -1,23 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {speak} from 'expo-speech';
 import {
   Button,
   Card,
   List,
-  Text,
   IconButton,
+  withTheme,
 } from 'react-native-paper';
 import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
 
-const speakResults = ({question_prefix, question, answer}) => {
-  speak(`${question_prefix} ${question}? ${answer}.`, {language: 'pl'});
-}
+function ResultScreen({ onClose, results, ...rest }) {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const SPEAK_OPTIONS = {
+    language: 'pl',
+    onStart: () => setIsSpeaking(true),
+    onDone: () => setIsSpeaking(false),
+  }
+  const speakResults = ({question_prefix, question, answer, theme: {colors}}) => {
+    if (!isSpeaking) {
+      speak(`${question_prefix} ${question}? ${answer}.`, SPEAK_OPTIONS);
+    }
+  }
 
-export default function ResultScreen({ onClose, results }) {
   return (
     <Card
       style={styles.questionList}
@@ -38,7 +46,11 @@ export default function ResultScreen({ onClose, results }) {
                 <Card.Title
                   title={`${result.question_prefix} ${result.question}`}
                   subtitle={result.answer}
-                  right={() => <IconButton icon='volume-up' onPress={() => speakResults(result)}/>}
+                  right={() => <IconButton
+                                  icon='volume-up'
+                                  onPress={() => speakResults(result)}
+                                  color={isSpeaking ? color.disabled : color.primary}
+                                />}
                 />
               </Card>
             ))}
@@ -65,6 +77,8 @@ ResultScreen.propTypes = {
 };
 ResultScreen.defaultProps = {};
 
+export default withTheme(ResultScreen);
+
 const styles = StyleSheet.create({
   list: {
     flex: 1,
@@ -76,5 +90,5 @@ const styles = StyleSheet.create({
   questionList: {
     flex: 1,
     marginTop: 24,
-  }
+  },
 });

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {speak} from 'expo-speech';
 import {
+  Avatar,
   Button,
   Card,
   List,
@@ -11,6 +12,7 @@ import {
 import {
   ScrollView,
   StyleSheet,
+  View,
 } from 'react-native';
 
 function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
@@ -25,6 +27,8 @@ function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
       speak(`${question_prefix} ${question}? ${answer}.`, SPEAK_OPTIONS);
     }
   }
+
+  console.log(results);
 
   return (
     <Card
@@ -46,6 +50,13 @@ function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
                 <Card.Title
                   title={`${result.question_prefix} ${result.question}`}
                   subtitle={result.answer}
+                  left={() => (
+                    <View>
+                      <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${result.question_author_avatar}` }} style={styles.resultFirstImage} />
+                      <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${result.answer_author_avatar}` }} />
+                    </View>
+                  )}
+                  leftStyle={{ width: 30, margin: 0 }}
                   right={() => <IconButton
                                   icon='volume-up'
                                   onPress={() => speakResults(result)}
@@ -91,4 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 24,
   },
+  resultFirstImage: {
+    marginBottom: 5,
+  }
 });

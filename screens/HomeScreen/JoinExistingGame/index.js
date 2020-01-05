@@ -22,7 +22,7 @@ export default function JoinExistingGame(props, context) {
     );
   }
 
-  if(!userPhoto) {
+  if (!userPhoto) {
     return (
       <AddFacePhoto />
     );

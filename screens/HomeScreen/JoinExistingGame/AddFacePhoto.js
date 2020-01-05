@@ -55,7 +55,6 @@ export default function AddFacePhoto(props) {
           base64: true,
         },
       );
-      console.log(manipResult.base64)
       setUserPhoto(manipResult.base64);
     }
   }

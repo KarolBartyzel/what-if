@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import QRCode from 'react-native-qrcode';
+import QRCode from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
 
 import RoomCreationScreen from './RoomCreationScreen';
@@ -29,7 +29,7 @@ export default function CreateNewGame(props) {
       <Card.Content style={styles.createNewGame}>
         {roomUuid && (
         <QRCode
-          value={roomUuid}
+          value={"http://facebook.github.io/react-native/"}
           size={width - 10}
         />
         )}

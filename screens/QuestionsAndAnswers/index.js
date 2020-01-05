@@ -54,7 +54,7 @@ export default function ({ navigation }) {
 
   const submit = () => {
     if (question.length * answer.length === 0) return;
-    const userAnswers = ({
+    const finalUserAnswers = ({
       ...userAnswers,
       [currentQuestionPrefix]: {
         question,
@@ -66,7 +66,7 @@ export default function ({ navigation }) {
     setQuestion('');
     setAnswer('');
 
-    sendQuestionsAnswers(userAnswers);
+    sendQuestionsAnswers(finalUserAnswers);
     navigation.navigate('AwaitPlayerAnswers');
   };
 

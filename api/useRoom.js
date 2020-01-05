@@ -11,7 +11,7 @@ function generateUsername() {
 
 export default () => {
   const [userId, setUserId] = useState('');
-  const [userPhoto, setUserPhoto] = useState(null);
+  const [userPhoto, setUserPhoto] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ error: '' });
   const [roomId, setRoomId] = useState('');
@@ -27,11 +27,7 @@ export default () => {
     if (roomId === '') return;
     const socket = new Socket(`${apiUrl}/socket`, { params: {} });
     socket.connect();
-<<<<<<< HEAD
-    const channel = socket.channel(`room:${roomId}`, { username, avatar: '' });
-=======
     const channel = socket.channel(`room:${roomId}`, { username, avatar: userPhoto });
->>>>>>> Add photos xoxo
     channel.join()
       .receive('ok', ({ user_id, questions_prefixes, room_name }) => {
         console.log(user_id, questions_prefixes, room_name )
@@ -87,7 +83,7 @@ export default () => {
     room.push('submit', questionsAnswers, 10000);
   };
 
-<<<<<<< HEAD
+
   const resetState = () => {
     setUserId('');
     setLoading(true);
@@ -117,8 +113,7 @@ export default () => {
     setUsername,
     users,
     resetState,
+    userPhoto,
+    setUserPhoto,
   ];
-=======
-  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername, users, userPhoto, setUserPhoto];
->>>>>>> Add photos xoxo
 };

@@ -38,7 +38,7 @@ function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
       >
         <Card.Content>
           <List.Section>
-            {results.map((result) => (
+            {results !== null && results.map((result) => (
               <Card
                 key={`${result.question_prefix} ${result.question}`}
                 style={styles.questionCard}

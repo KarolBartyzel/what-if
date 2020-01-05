@@ -67,7 +67,7 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
             />
             <ProgressBar
               style={styles.loader}
-              progress={answeredUsersCount / allUsersCount}
+              progress={30}
               indeterminate
             />
             {userList.map((answeredUser) => (

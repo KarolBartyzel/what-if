@@ -34,7 +34,12 @@ export default function App(props) {
     username,
     setUsername,
     users,
+<<<<<<< HEAD
     resetState,
+=======
+    userPhoto,
+    setUserPhoto,
+>>>>>>> Add photos xoxo
   ] = useRoom();
 
   return !isLoadingComplete
@@ -60,7 +65,12 @@ export default function App(props) {
         username,
         setUsername,
         users,
+<<<<<<< HEAD
         resetState,
+=======
+        userPhoto,
+        setUserPhoto,
+>>>>>>> Add photos xoxo
       }}
       >
         <PaperProvider theme={theme}>

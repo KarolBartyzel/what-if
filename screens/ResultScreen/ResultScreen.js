@@ -13,7 +13,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-function ResultScreen({ onClose, results, ...rest }) {
+function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const SPEAK_OPTIONS = {
     language: 'pl',
@@ -49,7 +49,7 @@ function ResultScreen({ onClose, results, ...rest }) {
                   right={() => <IconButton
                                   icon='volume-up'
                                   onPress={() => speakResults(result)}
-                                  color={isSpeaking ? color.disabled : color.primary}
+                                  color={isSpeaking ? colors.disabled : colors.primary}
                                 />}
                 />
               </Card>

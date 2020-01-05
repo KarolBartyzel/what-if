@@ -16,7 +16,7 @@ import {
 function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const SPEAK_OPTIONS = {
-    language: 'pl',
+    language: 'en',
     onStart: () => setIsSpeaking(true),
     onDone: () => setIsSpeaking(false),
   }

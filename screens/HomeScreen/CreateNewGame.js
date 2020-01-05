@@ -29,7 +29,7 @@ export default function CreateNewGame(props) {
       <Card.Content style={styles.createNewGame}>
         {roomUuid && (
         <QRCode
-          value={"http://facebook.github.io/react-native/"}
+          value={roomUuid}
           size={width - 10}
         />
         )}

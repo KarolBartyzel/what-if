@@ -20,7 +20,7 @@ function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
     onStart: () => setIsSpeaking(true),
     onDone: () => setIsSpeaking(false),
   }
-  const speakResults = ({question_prefix, question, answer, theme: {colors}}) => {
+  const speakResults = ({question_prefix, question, answer }) => {
     if (!isSpeaking) {
       speak(`${question_prefix} ${question}? ${answer}.`, SPEAK_OPTIONS);
     }

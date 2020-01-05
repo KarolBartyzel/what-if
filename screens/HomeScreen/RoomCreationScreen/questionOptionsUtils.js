@@ -1,7 +1,7 @@
 export const questionOptions = [
-  'What if',
-  'Why',
-  'How',
+  'Co by było gdyby',
+  'Dlaczego',
+  'Jak',
 ];
 
 export function getInitialQuestionObject() {

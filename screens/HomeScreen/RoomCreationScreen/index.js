@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Dimensions,
+  View,
 } from 'react-native';
 
 import {
   Button,
   Card,
+  IconButton,
   Subheading,
   TextInput,
   HelperText
@@ -49,29 +51,31 @@ export default function RoomCreationScreen(props) {
         <Subheading>
           General
         </Subheading>
-        <TextInput
-          label="Room name"
-          onChangeText={(text) => setRoomName(text)}
-          disabled
-          mode="outlined"
-          value={roomName}
-          error={isTouched && !roomName}
-          onBlur={() => {
-            setIsTouched(true);
-          }}
-        />
+        <View style={styles.roomNameContainer}>
+          <TextInput
+            label="Room name"
+            onChangeText={(text) => setRoomName(text)}
+            disabled
+            mode="outlined"
+            value={roomName}
+            error={isTouched && !roomName}
+            onBlur={() => {
+              setIsTouched(true);
+            }}
+            style={styles.roomNameInput}
+          />
+          <IconButton
+            icon='autorenew'
+            onPress={() => setRoomName(generateRoomName())}
+            style={styles.roomNameButton}
+          />
+        </View>
         <HelperText
           type="error"
           visible={isTouched && !roomName}
         >
           Room name is required
         </HelperText>
-
-        <Button
-          onPress={() => setRoomName(generateRoomName())}
-        >
-          Randomize
-        </Button>
 
         <Subheading>
           Questions
@@ -123,5 +127,16 @@ const styles = StyleSheet.create({
   },
   createGameButtonContent: {
     padding: 5,
+  },
+  roomNameButton: {
+    width: '15%',
+  },
+  roomNameContainer: {
+    alignItems: 'center',
+    width: '100%',
+    flexDirection: 'row',
+  },
+  roomNameInput: {
+    width: '85%',
   },
 });

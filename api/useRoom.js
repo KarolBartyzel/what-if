@@ -3,7 +3,7 @@ import { Socket } from './PhoenixChannels';
 
 import { adjectives, getRandomInt, usernameNouns } from '../constants/Names';
 
-const apiUrl = 'https://hidden-hollows-14760.herokuapp.com';
+const apiUrl = 'http://192.168.0.164:4000';
 
 function generateUsername() {
   return `${adjectives[getRandomInt(0, adjectives.length)]} ${usernameNouns[getRandomInt(0, usernameNouns.length)]}`;
@@ -26,7 +26,7 @@ export default () => {
     if (roomId === '') return;
     const socket = new Socket(`${apiUrl}/socket`, { params: {} });
     socket.connect();
-    const channel = socket.channel(`room:${roomId}`, { username });
+    const channel = socket.channel(`room:${roomId}`, { username, avatar: '' });
     channel.join()
       .receive('ok', ({ user_id, questions_prefixes, room_name }) => {
         console.log(user_id, questions_prefixes, room_name )

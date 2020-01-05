@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import QRCode from 'react-native-qrcode-svg';
+import QRCodeAndroid from 'react-native-qrcode'; 
+import QRCodeIOS from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
 
 import RoomCreationScreen from './RoomCreationScreen';
@@ -27,8 +28,14 @@ export default function CreateNewGame(props) {
         <RoomCreationScreen setRoomUuid={setRoomUuid} />
       )}
       <Card.Content style={styles.createNewGame}>
-        {roomUuid && (
-        <QRCode
+        {roomUuid && Platform.OS === 'ios' && (
+        <QRCodeIOS
+          value={roomUuid}
+          size={width - 10}
+        />
+        )}
+        {roomUuid && Platform.OS === 'android' && (
+        <QRCodeAndroid
           value={roomUuid}
           size={width - 10}
         />

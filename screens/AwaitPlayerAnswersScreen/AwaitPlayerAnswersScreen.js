@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Avatar, Card, Chip, ProgressBar, Text } from 'react-native-paper';
 
-import getRandomAsset from './playerAvatars';
-
 import { RoomContext } from '../../api/RoomContext';
 
 export default function AwaitPlayerAnswersScreen({ navigation }) {
@@ -77,9 +75,9 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
                 selected={answeredUser.answered}
                 mode="outlined"
                 avatar={<Avatar.Image
-                  source={getRandomAsset()}
                   size={24}
-                />}
+                  source={{ uri: `data:image/png;base64,${answeredUser.avatar}` }} />
+                }
               >
                 <Text>
                   {answeredUser.name}

@@ -80,16 +80,17 @@ export default function RoomCreationScreen(props) {
         <Subheading>
           Questions
         </Subheading>
-        <HelperText
-          type="info"
-          visible={!getQuestionArray(questionObject).length}
-        >
-          At least one question has to be picked
-        </HelperText>
+
         <QuestionOptions
           onQuestionOptionPress={onQuestionOptionPress}
           questionObject={questionObject}
         />
+        <HelperText
+          type="error"
+          visible={!getQuestionArray(questionObject).length}
+        >
+          At least one question has to be picked
+        </HelperText>
       </Card.Content>
       <Card.Actions style={styles.actions}>
         <Button

@@ -9,6 +9,7 @@ import { RoomContext } from '../../api/RoomContext';
 export default function AwaitPlayerAnswersScreen({ navigation }) {
   const {
     answersObject,
+    userId: currentPlayerUserId,
     users,
   } = useContext(RoomContext);
 
@@ -83,6 +84,11 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
                 <Text>
                   {answeredUser.name}
                 </Text>
+                {
+                  currentPlayerUserId === answeredUser.user_id
+                    ? (<Text>(You)</Text>)
+                    : (null)
+                }
               </Chip>
             ))}
           </Card.Content>

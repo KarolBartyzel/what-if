@@ -34,6 +34,7 @@ export default function App(props) {
     username,
     setUsername,
     users,
+    resetState,
   ] = useRoom();
 
   return !isLoadingComplete
@@ -59,6 +60,7 @@ export default function App(props) {
         username,
         setUsername,
         users,
+        resetState,
       }}
       >
         <PaperProvider theme={theme}>

@@ -82,5 +82,34 @@ export default () => {
     room.push('submit', questionsAnswers, 10000);
   };
 
-  return [userId, loading, error, answersObject, setRoomId, gameStarted, broadcastGameStart, sendQuestionsAnswers, questionsPrefixes, roomName, username, setUsername, users];
+  const resetState = () => {
+    setUserId('');
+    setLoading(true);
+    setError('');
+    setRoomId('');
+    changeGameStarted('');
+    changeRoom(null);
+    setQuestionsPrefixes('');
+    seRoomName('');
+    setAnswersObject({ answered_users: [], answers: null });
+    setUsername(generateUsername());
+    setUsers([]);
+  };
+
+  return [
+    userId,
+    loading,
+    error,
+    answersObject,
+    setRoomId,
+    gameStarted,
+    broadcastGameStart,
+    sendQuestionsAnswers,
+    questionsPrefixes,
+    roomName,
+    username,
+    setUsername,
+    users,
+    resetState,
+  ];
 };

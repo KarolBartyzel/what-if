@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
 import ResultScreen from './ResultScreen';
 import { RoomContext } from '../../api/RoomContext';
@@ -9,10 +8,14 @@ export default function ResultScreenWrapper(props) {
 
   const {
     answersObject,
+    resetState,
   } = useContext(RoomContext);
   const { answers: results } = answersObject;
 
-  const onClose = () => navigation.navigate('Home');
+  const onClose = () => {
+    resetState();
+    navigation.navigate('Home');
+  };
 
   return (
     <ResultScreen

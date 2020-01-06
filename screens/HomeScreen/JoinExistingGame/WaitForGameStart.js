@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator, Headline } from 'react-native-paper';
 
-export default function WaitForGameStart(props) {
+export default function WaitForGameStart() {
   return (
     <View style={styles.waitForGameStart}>
       <Headline>Wait for room owner to start...</Headline>

@@ -3,8 +3,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import PropTypes from 'prop-types';
-import { RoomContext } from '../../../api/RoomContext';
+import RoomContext from '../../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
@@ -21,7 +20,7 @@ export default function ScanQrCode(props) {
     askForCameraPermission();
   }, []);
 
-  function handleBarCodeScanned({ type, data: roomUuid }) {
+  function handleBarCodeScanned({ data: roomUuid }) {
     setRoomId(roomUuid);
     props.setIsScanned(true);
   }
@@ -29,22 +28,22 @@ export default function ScanQrCode(props) {
   return (
     <View style={styles.joinExistingGame}>
       {hasCameraPermission === null && (
-      <Text>Requesting for camera permission</Text>
+        <Text>Requesting for camera permission</Text>
       )}
       {hasCameraPermission === false && (
-      <Text>No access to camera</Text>
+        <Text>No access to camera</Text>
       )}
       {hasCameraPermission === true && (
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={[StyleSheet.absoluteFill, styles.joinExistingGame]}
-      >
-        <View style={styles.barCodeScannerContainer}>
-          <View style={styles.barCodeScannerOpacity} />
-          <View style={styles.barCodeScannerNoOpacity} />
-          <View style={styles.barCodeScannerOpacity} />
-        </View>
-      </BarCodeScanner>
+        <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          style={[StyleSheet.absoluteFill, styles.joinExistingGame]}
+        >
+          <View style={styles.barCodeScannerContainer}>
+            <View style={styles.barCodeScannerOpacity} />
+            <View style={styles.barCodeScannerNoOpacity} />
+            <View style={styles.barCodeScannerOpacity} />
+          </View>
+        </BarCodeScanner>
       )}
     </View>
   );

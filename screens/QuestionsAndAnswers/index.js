@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { Button, ProgressBar } from 'react-native-paper';
 import QuestionAnswerForm from './QuestionAnswerForm';
-import { RoomContext } from '../../api/RoomContext';
+import RoomContext from '../../api/RoomContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +47,9 @@ export default function ({ navigation }) {
         answer,
       },
     });
-    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1));
+    setCurrentQuestionPrefixIndex(Math.min(
+      currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1,
+    ));
     setQuestion('');
     setAnswer('');
   };
@@ -62,7 +64,9 @@ export default function ({ navigation }) {
       },
     });
 
-    setCurrentQuestionPrefixIndex(Math.min(currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1));
+    setCurrentQuestionPrefixIndex(Math.min(
+      currentQuestionPrefixIndex + 1, questionsPrefixes.length - 1,
+    ));
     setQuestion('');
     setAnswer('');
 
@@ -89,28 +93,28 @@ export default function ({ navigation }) {
           setQuestion={setQuestion}
         />
         {
-          currentQuestionPrefixIndex === questionsPrefixes.length - 1
-            ? (
-              <Button
-                mode="contained"
-                style={styles.button}
-                disabled={question.length * answer.length === 0}
-                onPress={submit}
-              >
+                    currentQuestionPrefixIndex === questionsPrefixes.length - 1
+                      ? (
+                        <Button
+                          mode="contained"
+                          style={styles.button}
+                          disabled={question.length * answer.length === 0}
+                          onPress={submit}
+                        >
                 Submit Answers
-              </Button>
-            )
-            : (
-              <Button
-                mode="contained"
-                style={styles.button}
-                onPress={handleQuestion}
-                disabled={question.length * answer.length === 0}
-              >
+                        </Button>
+                      )
+                      : (
+                        <Button
+                          mode="contained"
+                          style={styles.button}
+                          onPress={handleQuestion}
+                          disabled={question.length * answer.length === 0}
+                        >
               Next question
-              </Button>
-            )
-        }
+                        </Button>
+                      )
+                }
       </ScrollView>
     </SafeAreaView>
   );

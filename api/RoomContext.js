@@ -1,3 +1,4 @@
 import React from 'react';
 
-export const RoomContext = React.createContext();
+const RoomContext = React.createContext();
+export default RoomContext;

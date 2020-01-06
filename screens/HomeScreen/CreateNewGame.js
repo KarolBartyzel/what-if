@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import QRCodeAndroid from 'react-native-qrcode'; 
+import QRCodeAndroid from 'react-native-qrcode';
 import QRCodeIOS from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
 
-import RoomCreationScreen from './RoomCreationScreen';
-import { RoomContext } from '../../api/RoomContext';
 import { SafeAreaView } from 'react-navigation';
+import RoomCreationScreen from './RoomCreationScreen';
+import RoomContext from '../../api/RoomContext';
+
 const { width } = Dimensions.get('window');
 
 export default function CreateNewGame(props) {

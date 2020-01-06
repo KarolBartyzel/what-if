@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Socket } from './PhoenixChannels';
+import { SERVER_URL } from '../dotenv';
 
 import { adjectives, getRandomInt, usernameNouns } from '../constants/Names';
-
-const apiUrl = 'http://192.168.0.164:4000';
 
 function generateUsername() {
   return `${adjectives[getRandomInt(0, adjectives.length)]} ${usernameNouns[getRandomInt(0, usernameNouns.length)]}`;
@@ -24,17 +23,17 @@ export default () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (roomId === '') return;
-    const socket = new Socket(`${apiUrl}/socket`, { params: {} });
+    if (roomId === '') return () => {};
+    const socket = new Socket(`${SERVER_URL}/socket`, { params: {} });
     socket.connect();
     const channel = socket.channel(`room:${roomId}`, { username, avatar: userPhoto });
     channel.join()
-      .receive('ok', ({ user_id, questions_prefixes, room_name }) => {
-        console.log(user_id, questions_prefixes, room_name )
+      .receive('ok', ({ user_id: newUserId, questions_prefixes: newQuestionPrefixes, room_name: newRoomName }) => {
+        console.log(newUserId, newQuestionPrefixes, newRoomName);
         changeRoom(channel);
-        setUserId(user_id);
-        setQuestionsPrefixes(questions_prefixes);
-        seRoomName(room_name);
+        setUserId(newUserId);
+        setQuestionsPrefixes(newQuestionPrefixes);
+        seRoomName(newRoomName);
         setLoading(false);
       })
       .receive('error', ({ reason }) => {
@@ -62,7 +61,7 @@ export default () => {
   }, [roomId]);
 
   const broadcastGameStart = () => {
-    if(room) room.push('start_game', {}, 10000);
+    if (room) room.push('start_game', {}, 10000);
   };
 
   const sendQuestionsAnswers = (questionsAnswersByPrefix) => {

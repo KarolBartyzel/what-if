@@ -11,7 +11,7 @@ import {
   IconButton,
   Subheading,
   TextInput,
-  HelperText
+  HelperText,
 } from 'react-native-paper';
 
 import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUtils';
@@ -19,7 +19,7 @@ import { getInitialQuestionObject, getQuestionArray } from './questionOptionsUti
 import generateRoomName from './roomNames';
 import QuestionOptions from './QuestionOptions';
 import ApiHelper from '../../../api/ApiHelper';
-import { RoomContext } from '../../../api/RoomContext';
+import RoomContext from '../../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
@@ -65,7 +65,7 @@ export default function RoomCreationScreen(props) {
             style={styles.roomNameInput}
           />
           <IconButton
-            icon='autorenew'
+            icon="autorenew"
             onPress={() => setRoomName(generateRoomName())}
             style={styles.roomNameButton}
           />

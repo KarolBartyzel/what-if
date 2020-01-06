@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 import ResultScreen from './ResultScreen';
-import { RoomContext } from '../../api/RoomContext';
+import RoomContext from '../../api/RoomContext';
 
 export default function ResultScreenWrapper(props) {
   const { navigation } = props;
@@ -19,8 +19,8 @@ export default function ResultScreenWrapper(props) {
       actions: [NavigationActions.navigate({ routeName: 'Home' })],
     });
 
-    navigation.dispatch(resetAction); 
-    
+    navigation.dispatch(resetAction);
+
     resetState();
   };
 
@@ -31,6 +31,3 @@ export default function ResultScreenWrapper(props) {
     />
   );
 }
-
-ResultScreenWrapper.propTypes = {};
-ResultScreenWrapper.defaultProps = {};

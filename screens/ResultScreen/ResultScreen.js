@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {speak} from 'expo-speech';
+import { speak } from 'expo-speech';
 import {
   Avatar,
   Button,
@@ -15,20 +15,20 @@ import {
   View,
 } from 'react-native';
 
-function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
+function ResultScreen({
+  onClose, results, theme: { colors },
+}) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const SPEAK_OPTIONS = {
     language: 'pl',
     onStart: () => setIsSpeaking(true),
     onDone: () => setIsSpeaking(false),
-  }
-  const speakResults = ({question_prefix, question, answer }) => {
+  };
+  const speakResults = ({ questionPrefix, question, answer }) => {
     if (!isSpeaking) {
-      speak(`${question_prefix} ${question}? ${answer}.`, SPEAK_OPTIONS);
+      speak(`${questionPrefix} ${question}? ${answer}.`, SPEAK_OPTIONS);
     }
-  }
-
-  console.log(results);
+  };
 
   return (
     <Card
@@ -42,29 +42,30 @@ function ResultScreen({ onClose, results, theme: { colors }, ...rest }) {
       >
         <Card.Content>
           <List.Section>
-            {results.map((result) => (
-              <Card
-                key={`${result.question_prefix} ${result.question}`}
-                style={styles.questionCard}
-              >
-                <Card.Title
-                  title={`${result.question_prefix} ${result.question}`}
-                  subtitle={result.answer}
-                  left={() => (
-                    <View>
-                      <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${result.question_author_avatar}` }} style={styles.resultFirstImage} />
-                      <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${result.answer_author_avatar}` }} />
-                    </View>
-                  )}
-                  leftStyle={{ width: 30, margin: 0 }}
-                  right={() => <IconButton
-                                  icon='volume-up'
-                                  onPress={() => speakResults(result)}
-                                  color={isSpeaking ? colors.disabled : colors.primary}
-                                />}
-                />
-              </Card>
-            ))}
+            {results.map(
+              ({
+                question_prefix: questionPrefix,
+                question,
+                question_author_avatar: questionAuthorAvatar,
+                answer,
+                answer_author_avatar: answerAuthorAvatar,
+              }) => (
+                <Card key={`${questionPrefix} ${question}`} style={styles.questionCard}>
+                  <Card.Title
+                    title={`${questionPrefix} ${question}`}
+                    subtitle={answer}
+                    left={() => (
+                      <View>
+                        <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${questionAuthorAvatar}` }} style={styles.resultFirstImage} />
+                        <Avatar.Image size={28} source={{ uri: `data:image/png;base64,${answerAuthorAvatar}` }} />
+                      </View>
+                    )}
+                    leftStyle={{ width: 30, margin: 0 }}
+                    right={() => (<IconButton icon="volume-up" onPress={() => speakResults({ questionPrefix, question, answer })} color={isSpeaking ? colors.disabled : colors.primary} />)}
+                  />
+                </Card>
+              ),
+            )}
           </List.Section>
         </Card.Content>
       </ScrollView>
@@ -104,5 +105,5 @@ const styles = StyleSheet.create({
   },
   resultFirstImage: {
     marginBottom: 5,
-  }
+  },
 });

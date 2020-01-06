@@ -1431,7 +1431,7 @@ class Timer {
     clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
-      this.tries = this.tries + 1;
+      this.tries += 1;
       this.callback();
     }, this.timerCalc(this.tries + 1));
   }

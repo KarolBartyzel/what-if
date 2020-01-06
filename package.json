@@ -7,8 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "lint": "eslint api/** constants/** navigation/** screens/**",
-    "lint:fix": "eslint api/** constants/** navigation/** screens/** --fix"
+    "lint": "./node_modules/.bin/eslint api/** constants/** navigation/** screens/** App.js dotenv.js --ext .js",
+    "lint:fix": "./node_modules/.bin/eslint api/** constants/** navigation/** screens/** App.js dotenv.js --ext .js --fix"
   },
   "jest": {
     "preset": "jest-expo"
@@ -18,7 +18,7 @@
     "@expo/vector-icons": "^10.0.3",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.4.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",

@@ -7,7 +7,7 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import AppNavigator from './navigation/AppNavigator';
 import useRoom from './api/useRoom';
-import { RoomContext } from './api/RoomContext';
+import RoomContext from './api/RoomContext';
 
 const theme = {
   ...DefaultTheme,
@@ -17,7 +17,7 @@ const theme = {
   },
 };
 
-export default function App(props) {
+export default function App() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   const [
@@ -43,7 +43,7 @@ export default function App(props) {
     ? (
       <AppLoading
         startAsync={loadResourcesAsync}
-        onError={(error) => console.warn(error)}
+        onError={(e) => console.warn(e)}
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     )
@@ -69,8 +69,8 @@ export default function App(props) {
       >
         <PaperProvider theme={theme}>
           <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-            <AppNavigator/>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
           </View>
         </PaperProvider>
       </RoomContext.Provider>

@@ -4,12 +4,10 @@ import { Button, Card } from 'react-native-paper';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
-import { RoomContext } from '../../api/RoomContext';
-
-import {speak} from 'expo-speech';
+import RoomContext from '../../api/RoomContext';
 
 
-export default function StartGameScreen(props) {
+export default function StartGameScreen({ navigation }) {
   const [isNewGame, setIsNewGame] = React.useState(true);
   const {
     setRoomId,
@@ -32,21 +30,21 @@ export default function StartGameScreen(props) {
           mode={isNewGame ? 'text' : 'contained'}
           onPress={handleJoinExistingGame}
         >
-					Join Existing Room
+          Join Existing Room
         </Button>
         <Button
           mode={isNewGame ? 'contained' : 'text'}
           onPress={handleCreateNewGame}
         >
-					Create New Room
+          Create New Room
         </Button>
       </View>
       <Card style={styles.tabContent}>
         {isNewGame && (
-        <CreateNewGame navigate={props.navigation.navigate} />
+        <CreateNewGame navigate={navigation.navigate} />
         )}
         {!isNewGame && (
-        <JoinExistingGame navigate={props.navigation.navigate} />
+        <JoinExistingGame navigate={navigation.navigate} />
         )}
       </Card>
     </View>

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ActivityIndicator, Avatar, Card, Chip, ProgressBar, Text } from 'react-native-paper';
+import {
+  ActivityIndicator, Avatar, Card, Chip, ProgressBar, Text,
+} from 'react-native-paper';
 
-import { RoomContext } from '../../api/RoomContext';
+import RoomContext from '../../api/RoomContext';
 
 export default function AwaitPlayerAnswersScreen({ navigation }) {
   const {
@@ -33,7 +35,7 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
       answered: answeredUserIndex !== -1,
     };
   });
-  const answeredUsersCount = userList.filter(user => user.answered).length;
+  const answeredUsersCount = userList.filter((user) => user.answered).length;
   const allUsersCount = userList.length;
 
   return allUsersAnswered
@@ -74,19 +76,21 @@ export default function AwaitPlayerAnswersScreen({ navigation }) {
                 key={answeredUser.user_id}
                 selected={answeredUser.answered}
                 mode="outlined"
-                avatar={<Avatar.Image
-                  size={24}
-                  source={{ uri: `data:image/png;base64,${answeredUser.avatar}` }} />
-                }
+                avatar={(
+                  <Avatar.Image
+                    size={24}
+                    source={{ uri: `data:image/png;base64,${answeredUser.avatar}` }}
+                  />
+                                )}
               >
                 <Text>
                   {answeredUser.name}
                 </Text>
                 {
-                  currentPlayerUserId === answeredUser.user_id
-                    ? (<Text>(You)</Text>)
-                    : (null)
-                }
+                                    currentPlayerUserId === answeredUser.user_id
+                                      ? (<Text>(You)</Text>)
+                                      : (null)
+                                }
               </Chip>
             ))}
           </Card.Content>

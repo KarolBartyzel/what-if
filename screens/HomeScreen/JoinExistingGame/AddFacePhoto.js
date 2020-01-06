@@ -7,11 +7,11 @@ import * as Permissions from 'expo-permissions';
 import * as FaceDetector from 'expo-face-detector';
 import { Camera } from 'expo-camera';
 import * as ImageManipulator from 'expo-image-manipulator';
-import { RoomContext } from '../../../api/RoomContext';
+import RoomContext from '../../../api/RoomContext';
 
 const { width } = Dimensions.get('window');
 
-export default function AddFacePhoto(props) {
+export default function AddFacePhoto() {
   const camera = React.useRef(null);
   let faceScan = null;
   const [hasCameraPermission, setHasCameraPermission] = React.useState(null);
@@ -26,7 +26,7 @@ export default function AddFacePhoto(props) {
 
   async function handleFacesDetected(faces) {
     if (faces.faces.length === 1) {
-      faceScan = faces.faces[0];
+      [faceScan] = faces.faces;
     } else {
       faceScan = null;
     }
@@ -34,7 +34,7 @@ export default function AddFacePhoto(props) {
 
   async function takeFacePhoto() {
     if (faceScan && camera) {
-      setShowLoader(true)
+      setShowLoader(true);
       const lastFace = faceScan;
       const photo = await camera.current.takePictureAsync({ skipProcessing: false, quality: 0.7 });
       const { width: w } = photo;
@@ -46,7 +46,10 @@ export default function AddFacePhoto(props) {
         [
           {
             crop: {
-              originX: lastFace.bounds.origin.x * R, originY: lastFace.bounds.origin.y * R, width: lastFace.bounds.size.width * R, height: lastFace.bounds.size.height * R,
+              originX: lastFace.bounds.origin.x * R,
+              originY: lastFace.bounds.origin.y * R,
+              width: lastFace.bounds.size.width * R,
+              height: lastFace.bounds.size.height * R,
             },
           },
           { resize: { width: 75, height: 100 } },
@@ -66,14 +69,14 @@ export default function AddFacePhoto(props) {
   return (
     <View style={styles.joinExistingGame}>
       {hasCameraPermission === null && (
-      <Text>Requesting for camera permission</Text>
+        <Text>Requesting for camera permission</Text>
       )}
       {hasCameraPermission === false && (
-      <Text>No access to camera</Text>
+        <Text>No access to camera</Text>
       )}
       {
-        showLoader && <ActivityIndicator />
-      }
+                showLoader && <ActivityIndicator />
+            }
       {hasCameraPermission === true && (
         <Camera
           ref={camera}

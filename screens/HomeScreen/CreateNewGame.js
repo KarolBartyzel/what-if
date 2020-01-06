@@ -28,32 +28,34 @@ export default function CreateNewGame(props) {
       {!roomUuid && (
         <RoomCreationScreen setRoomUuid={setRoomUuid} />
       )}
-      <Card.Content style={styles.createNewGame}>
-        {roomUuid && Platform.OS === 'ios' && (
-        <QRCodeIOS
-          value={roomUuid}
-          size={width - 10}
-        />
-        )}
-        {roomUuid && Platform.OS === 'android' && (
-        <QRCodeAndroid
-          value={roomUuid}
-          size={width - 10}
-        />
-        )}
-      </Card.Content>
-      <Card.Actions style={styles.actions}>
-        {roomUuid && (
-        <Button
-          style={styles.startGameButton}
-          contentStyle={styles.startGameButtonContent}
-          mode="contained"
-          onPress={handleStartGame}
-        >
-          Start Game
-        </Button>
-        )}
-      </Card.Actions>
+      {roomUuid && (
+        <>
+          <Card.Content style={styles.createNewGame}>
+            {Platform.OS === 'ios' && (
+            <QRCodeIOS
+              value={roomUuid}
+              size={width - 10}
+            />
+            )}
+            {Platform.OS === 'android' && (
+            <QRCodeAndroid
+              value={roomUuid}
+              size={width - 10}
+            />
+            )}
+          </Card.Content>
+          <Card.Actions style={styles.actions}>
+            <Button
+              style={styles.startGameButton}
+              contentStyle={styles.startGameButtonContent}
+              mode="contained"
+              onPress={handleStartGame}
+            >
+              Start Game
+            </Button>
+          </Card.Actions>
+        </>
+      )}
     </SafeAreaView>
   );
 }

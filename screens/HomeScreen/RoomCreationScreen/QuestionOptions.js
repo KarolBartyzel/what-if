@@ -16,20 +16,20 @@ export default function QuestionOptions({
   return (
     <View style={styles.questionOptions}>
       {
-                questionOptions.map((questionOption) => (
-                  <Chip
-                    key={questionOption}
-                    onPress={onQuestionOptionPress(questionOption)}
-                    mode="outlined"
-                    selected={questionObject[questionOption]}
-                    style={styles.chip}
-                  >
-                    <Text>
-                      {questionOption}
-                    </Text>
-                  </Chip>
-                ))
-            }
+        questionOptions.map((questionOption) => (
+          <Chip
+            key={questionOption}
+            onPress={onQuestionOptionPress(questionOption)}
+            mode="outlined"
+            selected={questionObject[questionOption]}
+            style={styles.chip}
+          >
+            <Text>
+              {questionOption}
+            </Text>
+          </Chip>
+        ))
+      }
     </View>
   );
 }
@@ -45,8 +45,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 4,
     marginBottom: 4,
-  },
-  questionOptions: {
-    flex: 1,
   },
 });

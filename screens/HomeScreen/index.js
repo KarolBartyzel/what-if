@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
+import i18n from 'i18n-js';
 
 import JoinExistingGame from './JoinExistingGame';
 import CreateNewGame from './CreateNewGame';
 import RoomContext from '../../api/RoomContext';
-
 
 export default function StartGameScreen({ navigation }) {
   const [isNewGame, setIsNewGame] = React.useState(true);
@@ -30,13 +30,13 @@ export default function StartGameScreen({ navigation }) {
           mode={isNewGame ? 'text' : 'contained'}
           onPress={handleJoinExistingGame}
         >
-          Join Existing Room
+          {i18n.t('Join Existing Room')}
         </Button>
         <Button
           mode={isNewGame ? 'contained' : 'text'}
           onPress={handleCreateNewGame}
         >
-          Create New Room
+          {i18n.t('Create New Room')}
         </Button>
       </View>
       <Card style={styles.tabContent}>

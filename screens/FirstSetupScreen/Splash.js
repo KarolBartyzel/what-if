@@ -1,6 +1,8 @@
 import React from 'react';
 import { AsyncStorage, StyleSheet, View } from 'react-native';
-import { Button, Card, Text, ActivityIndicator } from 'react-native-paper';
+import {
+  Button, Card, Text, ActivityIndicator,
+} from 'react-native-paper';
 
 const splashes = [
   {
@@ -20,12 +22,13 @@ export default function Splash({ onSplashFinish }) {
   const [splashIndex, setSplashIndex] = React.useState(0);
 
   async function getSettings() {
-    const firstTime = await AsyncStorage.getItem('FIRST_TIME');
-    if (firstTime && JSON.parse(firstTime) === false) {
-      onSplashFinish();
-    } else {
-      setLoading(false);
-    }
+    const firstTime = false; await AsyncStorage.getItem('FIRST_TIME');
+    setLoading(false);
+    // if (firstTime && JSON.parse(firstTime) === false) {
+    //   onSplashFinish();
+    // } else {
+    //   setLoading(false);
+    // }
   }
 
   React.useEffect(() => {

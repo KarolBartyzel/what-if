@@ -1,6 +1,11 @@
 import React from 'react';
-import { AsyncStorage, StyleSheet, View } from 'react-native';
-import { ActivityIndicator, Button, Card, Text, HelperText } from 'react-native-paper';
+import {
+  AsyncStorage, StyleSheet, View, Image,
+} from 'react-native';
+import {
+  ActivityIndicator, Avatar, Button, Card, HelperText,
+} from 'react-native-paper';
+import FaceCroppingCamera from './FaceCroppingCamera/FaceCroppingCamera';
 
 const DEFAULT_AVATAR = 'DEFAULT_AVATAR';
 
@@ -10,7 +15,8 @@ export default function AvatarPicker({ setPhoto }) {
   const [loading, setLoading] = React.useState(true);
 
   async function fetchAvatar() {
-    const storedAvatar = await AsyncStorage.getItem('AVATAR');
+    const storedAvatar = false; // await AsyncStorage.getItem('AVATAR');
+    console.log(storedAvatar);
     if (storedAvatar) {
       setPhoto(storedAvatar);
     } else {
@@ -36,7 +42,22 @@ export default function AvatarPicker({ setPhoto }) {
     >
       <Card.Title title="Step 2: Take photo of yourself" subtitle="Photo will be used as avatar shown to other players" />
       <Card.Content style={styles.photoContent}>
-        <Text>TODO Jasiek</Text>
+        {
+          tmpPhoto
+            ? (
+              <View>
+                <Avatar.Image size={100} source={{ uri: `data:image/png;base64,${tmpPhoto}` }} />
+                <Button
+                  onPress={() => {
+                    setTmpPhoto(null);
+                  }}
+                >
+                  Retake
+                </Button>
+              </View>
+            )
+            : <FaceCroppingCamera setTmpPhoto={setTmpPhoto} />
+        }
         {isTouched && (
           <HelperText
             type="error"

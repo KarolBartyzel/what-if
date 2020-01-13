@@ -1,10 +1,12 @@
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import QuestionsAndAnswers from '../screens/QuestionsAndAnswers';
 import AwaitPlayerAnswers from '../screens/AwaitPlayerAnswersScreen/AwaitPlayerAnswersScreen';
 import ResultScreen from '../screens/ResultScreen/ResultScreenWrapper';
+import SettingsScreen from '../screens/SettingsScreen';
 import FirstSetupScreen from '../screens/FirstSetupScreen';
+import CustomDrawer from './CustomDrawer';
 
 const MainTabNavigator = createStackNavigator(
   {
@@ -33,9 +35,23 @@ const FirstTimeSetupNavigator = createStackNavigator(
   },
 );
 
+const DrawerNavigation = createDrawerNavigator({
+    Home: {
+      screen: MainTabNavigator,
+    },
+    Settings: {
+      screen: SettingsScreen,
+    },
+}, {
+  initialRouteName: 'Home',
+  drawerWidth: 300,
+  drawerPosition: 'left',
+  contentComponent: CustomDrawer
+});
+
 export default createAppContainer(
   createSwitchNavigator({
     FirstTimeSetup: FirstTimeSetupNavigator,
-    Main: MainTabNavigator,
+    Drawer: DrawerNavigation,
   }),
 );

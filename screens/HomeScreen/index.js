@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import i18n from 'i18n-js';
@@ -22,6 +22,10 @@ export default function StartGameScreen({ navigation }) {
     setRoomId('');
     setIsNewGame(true);
   }
+
+  useEffect(() => {
+    console.log(navigation);
+  });
 
   return (
     <View style={styles.startGameScreen}>
@@ -52,7 +56,7 @@ export default function StartGameScreen({ navigation }) {
 }
 
 StartGameScreen.navigationOptions = {
-  header: null,
+  header: null
 };
 
 const styles = StyleSheet.create({
